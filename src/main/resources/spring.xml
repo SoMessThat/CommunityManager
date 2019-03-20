@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<context:component-scan base-package="com.cjw.project" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 配置文件读取 -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:enterprise.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbcUrl}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="poolPreparedStatements" value="false" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+		<property name="filters" value="stat" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.cjw.project.code.po" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.cjw.project.code.dao" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="insert*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="add*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="update*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="saveOrUpdate*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="del*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="delete*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="remove*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="cancel*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="callBack*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="set*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="do*"
+				rollback-for="java.lang.Exception,com.capuccino.tulip.exception.MysqlDBException" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="interceptorPointCuts"
+			expression="execution(* com.cjw.project.code.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+	</aop:config>
+
+
+	<!-- ******************************** Xmemcached 配置 ******************************** -->
+	<!-- <bean id="cacheProxy" class="com.cjw.project.tool.cache.memcached.XmemcachedCacheProxy"> 
+		<property name="addressList" value="${memcached.servers}" /> <property name="connectionPoolSize" 
+		value="${memcached.connectionPoolSize}" /> </bean> -->
+</beans>
