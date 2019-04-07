@@ -18,10 +18,10 @@
 
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.cjw.project.code.ctrl" />
+	<context:component-scan base-package="mess.wkb.cm.code.ctrl" />
 
 	<bean id="mappingJacksonHttpMessageConverter"
-		class="com.cjw.project.tool.web.MappingJackson2HttpMessageConverter">
+		class="mess.wkb.cm.tool.web.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
@@ -41,7 +41,7 @@
 			</list>
 		</property>
 		<property name="webBindingInitializer">
-			<bean class="com.cjw.project.tool.web.BindingInitializer" />
+			<bean class="mess.wkb.cm.tool.web.BindingInitializer" />
 		</property>
 	</bean>
 
@@ -53,7 +53,7 @@
 			</list>
 		</property>
 		<property name="webBindingInitializer">
-			<bean class="com.cjw.project.tool.web.BindingInitializer" />
+			<bean class="mess.wkb.cm.tool.web.BindingInitializer" />
 		</property>
 	</bean>
 
@@ -61,7 +61,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
-		<property name="viewClass" value="com.cjw.project.tool.web.WebView" />
+		<property name="viewClass" value="mess.wkb.cm.tool.web.WebView" />
 	</bean>
 
 	<!-- 	多文件上传               -->
