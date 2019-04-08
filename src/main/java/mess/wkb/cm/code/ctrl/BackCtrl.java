@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import mess.wkb.cm.code.po.UserPO;
-import mess.wkb.cm.code.service.UserService;
+import mess.wkb.cm.code.po.CmUserPO;
+import mess.wkb.cm.code.service.CmUserService;
 import mess.wkb.cm.tool.util.ObjectUtil;
 import mess.wkb.cm.tool.util.code.MD5;
 import mess.wkb.cm.tool.web.MysqlDBException;
@@ -19,7 +19,7 @@ import mess.wkb.cm.tool.web.WebContext;
 public class BackCtrl{
 
 	@Autowired
-	UserService TuserService;
+	CmUserService TuserService;
 	
 	/**
 	 * 登陆	
@@ -49,25 +49,25 @@ public class BackCtrl{
 //			mv.setViewName("../login");
 //			return mv;
 //		}
-		UserPO user = new UserPO();
+		CmUserPO user = new CmUserPO();
 		user.setPassword(MD5.MD5Encode(password));
 		System.out.println(MD5.MD5Encode(password));
 		user.setAccount(account);
 		//对比密码
 		try {
-			UserPO TUserPO=TuserService.getTUserByParam(user);
-			if(!ObjectUtil.isEmpty(TUserPO)){
-//				TUserPO.setLastTime(loginTime);
-				TuserService.updateTUser(TUserPO);
-				if (TUserPO.getIsAdmin()==1) {
-					mv.addObject("user", TUserPO);
+			CmUserPO TCmUserPO=TuserService.getCmUserByParam(user);
+			if(!ObjectUtil.isEmpty(TCmUserPO)){
+//				TCmUserPO.setLastTime(loginTime);
+				TuserService.updateCmUser(TCmUserPO);
+				if (TCmUserPO.getState()=="1") {
+					mv.addObject("user", TCmUserPO);
 					mv.setViewName("index");
 				}
 				else {
 					mv.setViewName("usermain");
 				}
-				System.out.println(TUserPO);
-				WebContext.setSessionAttribute("userInfo", TUserPO);
+				System.out.println(TCmUserPO);
+				WebContext.setSessionAttribute("userInfo", TCmUserPO);
 			}else{
 				mv.addObject("erro", "账号或密码错误");
 				mv.setViewName("login");

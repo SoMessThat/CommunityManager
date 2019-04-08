@@ -1,0 +1,192 @@
+package mess.wkb.cm.code.ctrl;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import mess.wkb.cm.code.po.CmUserPO;
+import mess.wkb.cm.code.service.CmUserService;
+import mess.wkb.cm.tool.bean.Paged;
+import mess.wkb.cm.tool.util.ObjectUtil;
+import mess.wkb.cm.tool.util.UUIDUtil;
+import mess.wkb.cm.tool.util.ajax.Response;
+import mess.wkb.cm.tool.util.ajax.ResponseFactory;
+import mess.wkb.cm.tool.web.MysqlDBException;
+
+
+@Controller
+@RequestMapping("/CmUser") 
+public class CmUserCtrl {
+
+	@Autowired
+	private CmUserService cmUserService;
+	
+	@RequestMapping(value ="/queryPageCmUser")
+	@ResponseBody
+	public Response<List<CmUserPO>> queryPageCmUser(Integer page,Integer limit,HttpServletRequest request){
+		Response<List<CmUserPO>> response = ResponseFactory.getDefaultSuccessResponse();
+		Paged<CmUserPO> cmUsers = null;
+		
+		CmUserPO condition=new CmUserPO();
+        String id = request.getParameter("cmUser_id");
+		if(!ObjectUtil.isEmpty(id)) condition.setId(String.valueOf(id));
+        String account = request.getParameter("cmUser_account");
+		if(!ObjectUtil.isEmpty(account)) condition.setAccount(String.valueOf(account));
+        String username = request.getParameter("cmUser_username");
+		if(!ObjectUtil.isEmpty(username)) condition.setUsername(String.valueOf(username));
+        String password = request.getParameter("cmUser_password");
+		if(!ObjectUtil.isEmpty(password)) condition.setPassword(String.valueOf(password));
+        String avatar = request.getParameter("cmUser_avatar");
+		if(!ObjectUtil.isEmpty(avatar)) condition.setAvatar(String.valueOf(avatar));
+        String tel = request.getParameter("cmUser_tel");
+		if(!ObjectUtil.isEmpty(tel)) condition.setTel(String.valueOf(tel));
+        String creatTime = request.getParameter("cmUser_creatTime");
+		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(String.valueOf(creatTime));
+        String state = request.getParameter("cmUser_state");
+		if(!ObjectUtil.isEmpty(state)) condition.setState(String.valueOf(state));
+        String departmentId = request.getParameter("cmUser_departmentId");
+		if(!ObjectUtil.isEmpty(departmentId)) condition.setDepartmentId(String.valueOf(departmentId));
+        String studentId = request.getParameter("cmUser_studentId");
+		if(!ObjectUtil.isEmpty(studentId)) condition.setStudentId(String.valueOf(studentId));
+        String role = request.getParameter("cmUser_role");
+		if(!ObjectUtil.isEmpty(role)) condition.setRole(Long.valueOf(role));
+	
+		try {
+			cmUsers = cmUserService.queryPageCmUser(page,limit,condition);
+		} catch (MysqlDBException e) {
+			e.printStackTrace();
+			response.setError("网络连接失败，请检查网络");
+		}
+		response.setData(cmUsers.getListData());
+		response.setCount(cmUsers.getTotalHit());
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+		
+	}
+	
+	@RequestMapping(value="/delCmUser")
+	@ResponseBody
+	public Response<CmUserPO> delCmUser(String id){
+		Response<CmUserPO> response = ResponseFactory.getDefaultSuccessResponse();
+
+		if (ObjectUtil.isEmpty(id)) {
+			response.setError("id不能为空");
+			return response;
+		}
+		
+		try {
+			cmUserService.deleteCmUserById(id);
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	@RequestMapping(value="/findCmUserById")
+	@ResponseBody
+	public Response<CmUserPO> findCmUserById(String id){
+		Response<CmUserPO> response =ResponseFactory.getDefaultSuccessResponse();
+		if (ObjectUtil.isEmpty(id)) {
+			response.setError("id不能为空");
+			return response;
+		}
+		try {
+			response.setData(cmUserService.getCmUserById(id));
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	@RequestMapping(value="/updateCmUserById")
+	@ResponseBody
+	public Response<CmUserPO> updateCmUserById(HttpServletRequest request){
+		Response<CmUserPO> response =ResponseFactory.getDefaultSuccessResponse();
+		CmUserPO condition=new CmUserPO();
+        String id = request.getParameter("cmUser_id");
+		if(!ObjectUtil.isEmpty(id)) condition.setId(String.valueOf(id));
+        String account = request.getParameter("cmUser_account");
+		if(!ObjectUtil.isEmpty(account)) condition.setAccount(String.valueOf(account));
+        String username = request.getParameter("cmUser_username");
+		if(!ObjectUtil.isEmpty(username)) condition.setUsername(String.valueOf(username));
+        String password = request.getParameter("cmUser_password");
+		if(!ObjectUtil.isEmpty(password)) condition.setPassword(String.valueOf(password));
+        String avatar = request.getParameter("cmUser_avatar");
+		if(!ObjectUtil.isEmpty(avatar)) condition.setAvatar(String.valueOf(avatar));
+        String tel = request.getParameter("cmUser_tel");
+		if(!ObjectUtil.isEmpty(tel)) condition.setTel(String.valueOf(tel));
+        String creatTime = request.getParameter("cmUser_creatTime");
+		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(String.valueOf(creatTime));
+        String state = request.getParameter("cmUser_state");
+		if(!ObjectUtil.isEmpty(state)) condition.setState(String.valueOf(state));
+        String departmentId = request.getParameter("cmUser_departmentId");
+		if(!ObjectUtil.isEmpty(departmentId)) condition.setDepartmentId(String.valueOf(departmentId));
+        String studentId = request.getParameter("cmUser_studentId");
+		if(!ObjectUtil.isEmpty(studentId)) condition.setStudentId(String.valueOf(studentId));
+        String role = request.getParameter("cmUser_role");
+		if(!ObjectUtil.isEmpty(role)) condition.setRole(Long.valueOf(role));
+		
+		if (ObjectUtil.isEmpty(condition.getId())) {
+			response.setError("id不能为空");
+			return response;
+		}
+
+		try {
+			cmUserService.updateCmUser(condition);
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	@RequestMapping(value="/addCmUser")
+	@ResponseBody
+	public Response<CmUserPO> addCmUser(HttpServletRequest request){
+		Response<CmUserPO> response =ResponseFactory.getDefaultSuccessResponse();
+		
+		CmUserPO po=new CmUserPO();
+		po.setId(UUIDUtil.getUUID());
+        String id = request.getParameter("cmUser_id");
+		if(!ObjectUtil.isEmpty(id)) po.setId(String.valueOf(id));
+        String account = request.getParameter("cmUser_account");
+		if(!ObjectUtil.isEmpty(account)) po.setAccount(String.valueOf(account));
+        String username = request.getParameter("cmUser_username");
+		if(!ObjectUtil.isEmpty(username)) po.setUsername(String.valueOf(username));
+        String password = request.getParameter("cmUser_password");
+		if(!ObjectUtil.isEmpty(password)) po.setPassword(String.valueOf(password));
+        String avatar = request.getParameter("cmUser_avatar");
+		if(!ObjectUtil.isEmpty(avatar)) po.setAvatar(String.valueOf(avatar));
+        String tel = request.getParameter("cmUser_tel");
+		if(!ObjectUtil.isEmpty(tel)) po.setTel(String.valueOf(tel));
+        String creatTime = request.getParameter("cmUser_creatTime");
+		if(!ObjectUtil.isEmpty(creatTime)) po.setCreatTime(String.valueOf(creatTime));
+        String state = request.getParameter("cmUser_state");
+		if(!ObjectUtil.isEmpty(state)) po.setState(String.valueOf(state));
+        String departmentId = request.getParameter("cmUser_departmentId");
+		if(!ObjectUtil.isEmpty(departmentId)) po.setDepartmentId(String.valueOf(departmentId));
+        String studentId = request.getParameter("cmUser_studentId");
+		if(!ObjectUtil.isEmpty(studentId)) po.setStudentId(String.valueOf(studentId));
+        String role = request.getParameter("cmUser_role");
+		if(!ObjectUtil.isEmpty(role)) po.setRole(Long.valueOf(role));
+		
+		try {
+			cmUserService.addCmUser(po);
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+}

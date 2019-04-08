@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mess.wkb.cm.code.dao.CmUserDAO" >
+	<resultMap id="CmUserResultMap" type="mess.wkb.cm.code.po.CmUserPO">
+		<result property="id" column="id" />  
+		<result property="account" column="account" />  
+		<result property="username" column="username" />  
+		<result property="password" column="password" />  
+		<result property="avatar" column="avatar" />  
+		<result property="tel" column="tel" />  
+		<result property="creatTime" column="creat_time" />  
+		<result property="state" column="state" />  
+		<result property="departmentId" column="department_id" />  
+		<result property="studentId" column="student_id" />  
+		<result property="role" column="role" />  
+	</resultMap>
+</mapper>  
