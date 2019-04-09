@@ -29,14 +29,26 @@ public class CmAttendanceCtrl {
 	private CmAttendanceService cmAttendanceService;
 	SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
 
+	/**
+	 * 查看会议分页
+	 * @param page
+	 * @param limit
+	 */
 	@RequestMapping(value ="/queryPageCmAttendance")
 	@ResponseBody
 	public Response<List<CmAttendancePO>> queryPageCmAttendance(Integer page,Integer limit,HttpServletRequest request) throws ParseException{
 		Response<List<CmAttendancePO>> response = ResponseFactory.getDefaultSuccessResponse();
 		Paged<CmAttendancePO> cmAttendances = null;
 
-		
 		CmAttendancePO condition=new CmAttendancePO();
+		
+		//不越界，查找属于自己部门的会议
+		String departmentId = request.getParameter("cmAttendance_departmentId");
+		if(ObjectUtil.isEmpty(departmentId)){
+			response.setError("未查询到您的部门身份，请重新登录");
+			return response;
+		}
+		condition.setDepartmentId(departmentId);
 		String id = request.getParameter("cmAttendance_id");
 		if(!ObjectUtil.isEmpty(id)) condition.setId(Long.valueOf(id));
 		String name = request.getParameter("cmAttendance_name");
@@ -47,8 +59,6 @@ public class CmAttendanceCtrl {
 		if(!ObjectUtil.isEmpty(beginTime)) condition.setBeginTime(dateFormater.parse(beginTime));
 		String endTime = request.getParameter("cmAttendance_endTime");
 		if(!ObjectUtil.isEmpty(endTime)) condition.setEndTime(dateFormater.parse(endTime));
-		String departmentId = request.getParameter("cmAttendance_departmentId");
-		if(!ObjectUtil.isEmpty(departmentId)) condition.setDepartmentId(String.valueOf(departmentId));
 		String userName = request.getParameter("cmAttendance_userName");
 		if(!ObjectUtil.isEmpty(userName)) condition.setUserName(String.valueOf(userName));
 		String state = request.getParameter("cmAttendance_state");

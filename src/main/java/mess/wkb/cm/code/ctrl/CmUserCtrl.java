@@ -30,9 +30,6 @@ public class CmUserCtrl {
 	
 	/**
 	 * 查看干事列表
-	 * @param page
-	 * @param limit
-	 * @return
 	 */
 	@RequestMapping(value ="/queryPageCmUser")
 	@ResponseBody
@@ -79,8 +76,6 @@ public class CmUserCtrl {
 	
 	/**
 	 * 辞退干事
-	 * @param id
-	 * @return
 	 */
 	@RequestMapping(value="/delCmUser")
 	@ResponseBody
