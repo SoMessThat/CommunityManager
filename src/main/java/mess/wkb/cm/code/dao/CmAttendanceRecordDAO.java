@@ -2,23 +2,32 @@ package mess.wkb.cm.code.dao;
 
 import org.springframework.stereotype.Component;
 
-import mess.wkb.cm.code.po.CmAttendanceRecordPO;
+import mess.wkb.cm.code.vo.CmAttendanceRecord;
 
-
-/**
- * CmAttendanceRecordDAO
- * Description:
- * @author:WuKaiBin
- * @email:842387850@qq.com
- */
 @Component
-public interface CmAttendanceRecordDAO extends BaseDAO<CmAttendanceRecordPO> {
-	
+public interface CmAttendanceRecordDAO extends BaseDAO<CmAttendanceRecord> {
+    /**
+     *
+     */
+    int deleteByPrimaryKey(Long id);
 
+    /**
+     *
+     */
+    int insertSelective(CmAttendanceRecord record);
+
+    /**
+     *
+     */
+    CmAttendanceRecord selectByPrimaryKey(Long id);
+
+    /**
+     *
+     */
+    int updateByPrimaryKeySelective(CmAttendanceRecord record);
+
+    /**
+     *
+     */
+    int updateByPrimaryKey(CmAttendanceRecord record);
 }
-
-
-
-
-
-

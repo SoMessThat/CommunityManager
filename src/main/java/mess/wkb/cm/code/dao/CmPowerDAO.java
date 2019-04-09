@@ -2,10 +2,10 @@ package mess.wkb.cm.code.dao;
 
 import org.springframework.stereotype.Component;
 
-import mess.wkb.cm.code.vo.CmUser;
+import mess.wkb.cm.code.vo.CmPower;
 
 @Component
-public interface CmUserDAO extends BaseDAO<CmUser> {
+public interface CmPowerDAO extends BaseDAO<CmPower> {
     /**
      *
      */
@@ -14,20 +14,20 @@ public interface CmUserDAO extends BaseDAO<CmUser> {
     /**
      *
      */
-    int insertSelective(CmUser record);
+    int insertSelective(CmPower record);
 
     /**
      *
      */
-    CmUser selectByPrimaryKey(String id);
+    CmPower selectByPrimaryKey(String id);
 
     /**
      *
      */
-    int updateByPrimaryKeySelective(CmUser record);
+    int updateByPrimaryKeySelective(CmPower record);
 
     /**
      *
      */
-    int updateByPrimaryKey(CmUser record);
+    int updateByPrimaryKey(CmPower record);
 }
