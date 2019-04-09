@@ -58,7 +58,7 @@ public class BackCtrl{
 			CmUserPO TCmUserPO=TuserService.getCmUserByParam(user);
 			if(!ObjectUtil.isEmpty(TCmUserPO)){
 //				TCmUserPO.setLastTime(loginTime);
-				TuserService.updateCmUser(TCmUserPO);
+//				TuserService.updateCmUser(TCmUserPO);
 				if (TCmUserPO.getState()=="1") {
 					mv.addObject("user", TCmUserPO);
 					mv.setViewName("index");

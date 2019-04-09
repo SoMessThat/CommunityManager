@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import mess.wkb.cm.code.po.CmAttendancePO;
 import mess.wkb.cm.code.service.CmAttendanceService;
+import mess.wkb.cm.code.vo.CmAttendance;
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.util.ObjectUtil;
 import mess.wkb.cm.tool.util.ajax.Response;
@@ -141,14 +142,14 @@ public class CmAttendanceCtrl {
 		return response;
 	}
 	/**
-	 * 签到会议 
+	 * 发布会议 
 	 */
 	@RequestMapping(value="/addCmAttendance")
 	@ResponseBody
-	public Response<CmAttendancePO> addCmAttendance(HttpServletRequest request) throws ParseException{
-		Response<CmAttendancePO> response =ResponseFactory.getDefaultSuccessResponse();
+	public Response<CmAttendance> addCmAttendance(HttpServletRequest request) throws ParseException{
+		Response<CmAttendance> response =ResponseFactory.getDefaultSuccessResponse();
 
-		CmAttendancePO po=new CmAttendancePO();
+		CmAttendance po=new CmAttendance();
 		String name = request.getParameter("cmAttendance_name");
 		if(!ObjectUtil.isEmpty(name)) po.setName(String.valueOf(name));
 		String creatTime = request.getParameter("cmAttendance_creatTime");

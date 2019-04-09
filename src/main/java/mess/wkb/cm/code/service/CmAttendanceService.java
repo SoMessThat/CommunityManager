@@ -3,9 +3,12 @@ package mess.wkb.cm.code.service;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mess.wkb.cm.code.dao.CmAttendanceDAO;
 import mess.wkb.cm.code.po.CmAttendancePO;
+import mess.wkb.cm.code.vo.CmAttendance;
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.bean.Query;
 import mess.wkb.cm.tool.util.ObjectUtil;
@@ -14,6 +17,8 @@ import mess.wkb.cm.tool.web.MysqlDBException;
 
 @Service("cmAttendanceService")
 public class CmAttendanceService extends BaseService<CmAttendancePO>{
+	@Autowired
+	CmAttendanceDAO attendanceDAO;
 	
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -22,13 +27,13 @@ public class CmAttendanceService extends BaseService<CmAttendancePO>{
 	 * @param obj
 	 * @throws MysqlDBException
 	 */
-	public void addCmAttendance(CmAttendancePO obj) throws MysqlDBException{
+	public void addCmAttendance(CmAttendance obj) throws MysqlDBException{
 		if(ObjectUtil.isEmpty(obj)){
 			MysqlDBException e = new MysqlDBException("新增对象为空");
 			log.error("新增对象为空",e);
 			throw e;
 		}
-		this.insert(obj);
+		attendanceDAO.insertSelective(obj);
 	}
 	
 	/**

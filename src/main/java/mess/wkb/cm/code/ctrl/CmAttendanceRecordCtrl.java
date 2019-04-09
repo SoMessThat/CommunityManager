@@ -132,7 +132,11 @@ public class CmAttendanceRecordCtrl {
 		response.setResult(Response.RESULT_SUCCESS);
 		return response;
 	}
-	
+	/**
+	 * 签到
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/addCmAttendanceRecord")
 	@ResponseBody
 	public Response<CmAttendanceRecordPO> addCmAttendanceRecord(HttpServletRequest request) throws ParseException{

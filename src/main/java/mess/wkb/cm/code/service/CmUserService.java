@@ -3,18 +3,24 @@ package mess.wkb.cm.code.service;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.bean.Query;
 import mess.wkb.cm.tool.web.MysqlDBException;
 import mess.wkb.cm.tool.util.ObjectUtil;
-
+import mess.wkb.cm.code.dao.CmUserDAO;
+import mess.wkb.cm.code.dto.UserInfoDTO;
 import mess.wkb.cm.code.po.CmUserPO;
+import mess.wkb.cm.code.vo.CmUser;
 
 
 @Service("cmUserService")
 public class CmUserService extends BaseService<CmUserPO>{
+	
+	@Autowired
+	CmUserDAO userDAO;
 	
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -37,13 +43,13 @@ public class CmUserService extends BaseService<CmUserPO>{
 	 * @param obj
 	 * @throws MysqlDBException
 	 */
-	public void updateCmUser(CmUserPO obj) throws MysqlDBException{
+	public void updateCmUser(CmUser obj) throws MysqlDBException{
 		if(ObjectUtil.isEmpty(obj)){
 			MysqlDBException e = new MysqlDBException("修改对象为空");
 			log.error("修改对象为空",e);
 			throw e;
 		}
-		this.update(obj);
+		userDAO.updateByPrimaryKeySelective(obj);
 	}
 	
 	/**
@@ -65,13 +71,13 @@ public class CmUserService extends BaseService<CmUserPO>{
 	 * @param id
 	 * @throws MysqlDBException
 	 */
-	public CmUserPO getCmUserById(String id) throws MysqlDBException{
+	public UserInfoDTO getCmUserById(String id) throws MysqlDBException{
 		if(ObjectUtil.isEmpty(id)){
 			MysqlDBException e = new MysqlDBException("通过主键 查询对象，主键 id 不能为空");
 			log.error("通过主键 查询对象，主键 id 不能为空",e);
 			throw e;
 		}
-		return this.get(id);
+		return userDAO.getCmUserById(id);
 	}
 	
 	/**

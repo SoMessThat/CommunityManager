@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import mess.wkb.cm.code.dto.UserInfoDTO;
 import mess.wkb.cm.code.po.CmUserPO;
 import mess.wkb.cm.code.service.CmUserService;
+import mess.wkb.cm.code.vo.CmUser;
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.util.ObjectUtil;
 import mess.wkb.cm.tool.util.UUIDUtil;
@@ -26,6 +28,12 @@ public class CmUserCtrl {
 	@Autowired
 	private CmUserService cmUserService;
 	
+	/**
+	 * 查看干事列表
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
 	@RequestMapping(value ="/queryPageCmUser")
 	@ResponseBody
 	public Response<List<CmUserPO>> queryPageCmUser(Integer page,Integer limit,HttpServletRequest request){
@@ -69,6 +77,11 @@ public class CmUserCtrl {
 		
 	}
 	
+	/**
+	 * 辞退干事
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/delCmUser")
 	@ResponseBody
 	public Response<CmUserPO> delCmUser(String id){
@@ -89,10 +102,14 @@ public class CmUserCtrl {
 		return response;
 	}
 	
+	/**
+	 * 查看个人信息
+	 * @param id
+	 */
 	@RequestMapping(value="/findCmUserById")
 	@ResponseBody
-	public Response<CmUserPO> findCmUserById(String id){
-		Response<CmUserPO> response =ResponseFactory.getDefaultSuccessResponse();
+	public Response<UserInfoDTO> findCmUserById(String id){
+		Response<UserInfoDTO> response =ResponseFactory.getDefaultSuccessResponse();
 		if (ObjectUtil.isEmpty(id)) {
 			response.setError("id不能为空");
 			return response;
@@ -107,11 +124,15 @@ public class CmUserCtrl {
 		return response;
 	}
 	
+	/**
+	 * 修改个人信息
+	 * @param request
+	 */
 	@RequestMapping(value="/updateCmUserById")
 	@ResponseBody
-	public Response<CmUserPO> updateCmUserById(HttpServletRequest request){
-		Response<CmUserPO> response =ResponseFactory.getDefaultSuccessResponse();
-		CmUserPO condition=new CmUserPO();
+	public Response<CmUser> updateCmUserById(HttpServletRequest request){
+		Response<CmUser> response =ResponseFactory.getDefaultSuccessResponse();
+		CmUser condition=new CmUser();
         String id = request.getParameter("cmUser_id");
 		if(!ObjectUtil.isEmpty(id)) condition.setId(String.valueOf(id));
         String account = request.getParameter("cmUser_account");
@@ -124,14 +145,8 @@ public class CmUserCtrl {
 		if(!ObjectUtil.isEmpty(avatar)) condition.setAvatar(String.valueOf(avatar));
         String tel = request.getParameter("cmUser_tel");
 		if(!ObjectUtil.isEmpty(tel)) condition.setTel(String.valueOf(tel));
-        String creatTime = request.getParameter("cmUser_creatTime");
-		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(String.valueOf(creatTime));
         String state = request.getParameter("cmUser_state");
 		if(!ObjectUtil.isEmpty(state)) condition.setState(String.valueOf(state));
-        String departmentId = request.getParameter("cmUser_departmentId");
-		if(!ObjectUtil.isEmpty(departmentId)) condition.setDepartmentId(String.valueOf(departmentId));
-        String studentId = request.getParameter("cmUser_studentId");
-		if(!ObjectUtil.isEmpty(studentId)) condition.setStudentId(String.valueOf(studentId));
         String role = request.getParameter("cmUser_role");
 		if(!ObjectUtil.isEmpty(role)) condition.setRole(Long.valueOf(role));
 		

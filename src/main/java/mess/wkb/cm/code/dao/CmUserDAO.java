@@ -2,6 +2,7 @@ package mess.wkb.cm.code.dao;
 
 import org.springframework.stereotype.Component;
 
+import mess.wkb.cm.code.dto.UserInfoDTO;
 import mess.wkb.cm.code.vo.CmUser;
 
 @Component
@@ -30,4 +31,11 @@ public interface CmUserDAO extends BaseDAO<CmUser> {
      *
      */
     int updateByPrimaryKey(CmUser record);
+
+    /**
+     * 获取用户信息
+     * @param id
+     * @return
+     */
+	UserInfoDTO getCmUserById(String id);
 }

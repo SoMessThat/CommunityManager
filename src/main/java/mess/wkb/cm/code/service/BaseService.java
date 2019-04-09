@@ -56,7 +56,7 @@ public class BaseService<T> implements ApplicationContextAware{
      */
     public T insert(T obj) throws MysqlDBException{
     	try {
-    		getDAO().insert(obj);
+//    		getDAO().insert(obj);
     		return obj;
 		} catch (Exception e) {
 			e.printStackTrace();
