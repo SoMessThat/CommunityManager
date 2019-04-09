@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>后台末班</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="../plugs/layui/css/layui.css"/>
+</head>
+<body>
+  <div id="LAY_app"></div>
+  <script src="../plugs/layui/layui.js"></script>
+  <script>
+  layui.config({
+    base: '../js/' //指定 layuiAdmin 项目路径
+    ,version: '1.2.1'
+  }).use('index', function(){
+    var layer = layui.layer, admin = layui.admin;
+    layer.ready(function(){
+      admin.popup({
+        content: "入门提示"
+        ,area: '300px'
+        ,btnAlign: 'c'
+        ,shade: false
+      });
+    });
+  });
+  </script>
+  
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>
