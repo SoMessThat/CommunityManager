@@ -1,29 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>404</title>
+</head>
+<body>
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <!-- Í·²¿ÇøÓò -->
+    <!-- å¤´éƒ¨åŒºåŸŸ -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item layadmin-flexible" lay-unselect>
-        <a href="javascript:;" layadmin-event="flexible" title="²à±ßÉìËõ">
+        <a href="javascript:;" layadmin-event="flexible" title="ä¾§è¾¹ä¼¸ç¼©">
           <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
         </a>
       </li>
       <!--<li class="layui-nav-item layui-this layui-hide-xs layui-hide-sm layui-show-md-inline-block">
         <a lay-href="" title="">
-          ¿ØÖÆÌ¨
+          æ§åˆ¶å°
         </a>
       </li>-->
       <li class="layui-nav-item layui-hide-xs" lay-unselect>
-        <a href="http://www.layui.com/admin/" target="_blank" title="Ç°Ì¨">
+        <a href="http://www.layui.com/admin/" target="_blank" title="å‰å°">
           <i class="layui-icon layui-icon-website"></i>
         </a>
       </li>
       <li class="layui-nav-item" lay-unselect>
-        <a href="javascript:;" layadmin-event="refresh" title="Ë¢ĞÂ">
+        <a href="javascript:;" layadmin-event="refresh" title="åˆ·æ–°">
           <i class="layui-icon layui-icon-refresh-3"></i>
         </a>
       </li>
       <li class="layui-nav-item layui-hide-xs" lay-unselect>
-        <input type="text" placeholder="ËÑË÷..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search/keywords="> 
+        <input type="text" placeholder="æœç´¢..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search/keywords="> 
       </li>
     </ul>
     <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
@@ -32,12 +38,12 @@
         <a lay-href="app/message/" layadmin-event="message">
           <i class="layui-icon layui-icon-notice"></i>
           
-          <!-- Èç¹ûÓĞĞÂÏûÏ¢£¬ÔòÏÔÊ¾Ğ¡Ô²µã -->
-<!--           <script type="text/html" template lay-url="./json/message/new.js"> -->
-<!--           {{# if(d.data.newmsg){ }}  -->
+          <!-- å¦‚æœæœ‰æ–°æ¶ˆæ¯ï¼Œåˆ™æ˜¾ç¤ºå°åœ†ç‚¹ -->
+          <script type="text/html" template lay-url="./json/message/new.js">
+          {{# if(d.data.newmsg){ }} 
             <span class="layui-badge-dot"></span>
-<!--           {{# } }} -->
-<!--           </script> -->
+          {{# } }}
+          </script>
           
         </a>
       </li>
@@ -57,18 +63,18 @@
         </a>
       </li>
       <li class="layui-nav-item" lay-unselect>
-<!--         <script type="text/html" template lay-url="./json/user/session.js"  -->
-<!--         lay-done="layui.element.render('nav', 'layadmin-layout-right');"> -->
-<!--           <a href="javascript:;"> -->
-<!--             <cite>{{ d.data.username }}</cite> -->
-<!--           </a> -->
-<!--           <dl class="layui-nav-child"> -->
-<!--             <dd><a lay-href="set/user/info">»ù±¾×ÊÁÏ</a></dd> -->
-<!--             <dd><a lay-href="set/user/password">ĞŞ¸ÄÃÜÂë</a></dd> -->
-<!--             <hr> -->
-<!--             <dd layadmin-event="logout" style="text-align: center;"><a>ÍË³ö</a></dd> -->
-<!--           </dl> -->
-<!--         </script> -->
+        <script type="text/html" template lay-url="./json/user/session.js" 
+        lay-done="layui.element.render('nav', 'layadmin-layout-right');">
+          <a href="javascript:;">
+            <cite>{{ d.data.username }}</cite>
+          </a>
+          <dl class="layui-nav-child">
+            <dd><a lay-href="set/user/info">åŸºæœ¬èµ„æ–™</a></dd>
+            <dd><a lay-href="set/user/password">ä¿®æ”¹å¯†ç </a></dd>
+            <hr>
+            <dd layadmin-event="logout" style="text-align: center;"><a>é€€å‡º</a></dd>
+          </dl>
+        </script>
       </li>
       
       <li class="layui-nav-item layui-hide-xs" lay-unselect>
@@ -80,7 +86,7 @@
     </ul>
   </div>
   
-  <!-- ²à±ß²Ëµ¥ -->
+  <!-- ä¾§è¾¹èœå• -->
   <div class="layui-side layui-side-menu">
     <div class="layui-side-scroll">
       <script type="text/html" template lay-url="./json/menu.js?v={{ layui.admin.v }}" 
@@ -160,7 +166,7 @@
   </div>
   
 
-  <!-- Ò³Ãæ±êÇ© -->
+  <!-- é¡µé¢æ ‡ç­¾ -->
   <script type="text/html" template lay-done="layui.element.render('nav', 'layadmin-pagetabs-nav')">
     {{# if(layui.setter.pageTabs){ }}
     <div class="layadmin-pagetabs" id="LAY_app_tabs">
@@ -171,9 +177,9 @@
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;"></a>
             <dl class="layui-nav-child layui-anim-fadein">
-              <dd layadmin-event="closeThisTabs"><a href="javascript:;">¹Ø±Õµ±Ç°±êÇ©Ò³</a></dd>
-              <dd layadmin-event="closeOtherTabs"><a href="javascript:;">¹Ø±ÕÆäËü±êÇ©Ò³</a></dd>
-              <dd layadmin-event="closeAllTabs"><a href="javascript:;">¹Ø±ÕÈ«²¿±êÇ©Ò³</a></dd>
+              <dd layadmin-event="closeThisTabs"><a href="javascript:;">å…³é—­å½“å‰æ ‡ç­¾é¡µ</a></dd>
+              <dd layadmin-event="closeOtherTabs"><a href="javascript:;">å…³é—­å…¶å®ƒæ ‡ç­¾é¡µ</a></dd>
+              <dd layadmin-event="closeAllTabs"><a href="javascript:;">å…³é—­å…¨éƒ¨æ ‡ç­¾é¡µ</a></dd>
             </dl>
           </li>
         </ul>
@@ -186,14 +192,16 @@
     </div>
     {{# } }}
   </script>
-  <script type="text/javascript" src="../js/controller/common.js"></script>
   
-  <!-- Ö÷ÌåÄÚÈİ -->
+  
+  <!-- ä¸»ä½“å†…å®¹ -->
   <div class="layui-body" id="LAY_app_body">
     <div class="layadmin-tabsbody-item layui-show"></div>
   </div>
   
-  <!-- ¸¨ÖúÔªËØ£¬Ò»°ãÓÃÓÚÒÆ¶¯Éè±¸ÏÂÕÚÕÖ -->
+  <!-- è¾…åŠ©å…ƒç´ ï¼Œä¸€èˆ¬ç”¨äºç§»åŠ¨è®¾å¤‡ä¸‹é®ç½© -->
   <div class="layadmin-body-shade" layadmin-event="shade"></div>
   
 </div>
+</body>
+</html>
