@@ -116,4 +116,22 @@
       soft = #{soft,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <resultMap id="PowerMap" type="mess.wkb.cm.code.dto.PowerDTO">
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="jump" jdbcType="VARCHAR" property="jump" />
+    <collection property="list" select="mess.wkb.cm.code.dao.CmDepartmentDAO.selectByPrimaryKey" column="parant_id">
+	    <result column="title" jdbcType="VARCHAR" property="title" />
+	    <result column="icon" jdbcType="VARCHAR" property="icon" />
+	    <result column="jump" jdbcType="VARCHAR" property="jump" />
+	 </collection>
+  </resultMap>
+  <!--   查找权限子节点 	-->
+  <select id="selectPowerByUserID">
+	SELECT DISTINCT cp.* FROM cm_power cp
+	LEFT JOIN cm_role_power_ref crpf ON cp.id = crpf.power_id
+	LEFT JOIN cm_user_role_ref curr ON crpf.role_id = curr.role_id
+	WHERE curr.user_id = 1 AND parent_id IS NULL
+  </select>
 </mapper>
