@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
@@ -49,9 +48,9 @@ public interface BaseDAO<T> {
      * 如果是update时候会清掉原有对象的id..慎重使用吧,
      * @param obj
      */
-    @InsertProvider(type = CrudProvider.class,method = "insert")
+//    @InsertProvider(type = CrudProvider.class,method = "insert")
 //    @SelectKey(before=false,keyProperty="id",resultType=Integer.class,statementType= StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
-    public Integer insert(T obj);
+//    public Integer insert(T obj);
 
     @UpdateProvider(type = CrudProvider.class,method = "update")
     public Integer update(T obj);
