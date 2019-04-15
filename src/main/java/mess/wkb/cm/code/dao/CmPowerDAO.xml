@@ -121,17 +121,28 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="jump" jdbcType="VARCHAR" property="jump" />
-    <collection property="list" select="mess.wkb.cm.code.dao.CmDepartmentDAO.selectByPrimaryKey" column="parant_id">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <collection property="list" select="selectPowerTreeByUserID" column="id">
 	    <result column="title" jdbcType="VARCHAR" property="title" />
 	    <result column="icon" jdbcType="VARCHAR" property="icon" />
 	    <result column="jump" jdbcType="VARCHAR" property="jump" />
+	    <result column="name" jdbcType="VARCHAR" property="name" />
 	 </collection>
   </resultMap>
+  <!--   查找权限根节点 	-->
+  <select id="selectPowerRootByUserID" parameterType="java.lang.String" resultMap="PowerMap">
+  		SELECT DISTINCT cp.name name,cp.content title,cp.jump,cp.icon icon,cp.level,cp.id FROM cm_power cp
+		LEFT JOIN cm_role_power_ref crpf ON cp.id = crpf.power_id
+		LEFT JOIN cm_user_role_ref curr ON crpf.role_id = curr.role_id
+		WHERE curr.user_id = 1 AND cp.parent_id IS NULL AND soft = 'menu'
+		ORDER BY `level`
+  </select>
   <!--   查找权限子节点 	-->
-  <select id="selectPowerByUserID">
-	SELECT DISTINCT cp.* FROM cm_power cp
-	LEFT JOIN cm_role_power_ref crpf ON cp.id = crpf.power_id
-	LEFT JOIN cm_user_role_ref curr ON crpf.role_id = curr.role_id
-	WHERE curr.user_id = 1 AND parent_id IS NULL
+  <select id="selectPowerTreeByUserID" parameterType="java.lang.String" resultMap="PowerMap">
+		SELECT DISTINCT cp.name name,cp.content title,cp.jump,cp.icon icon,cp.level FROM cm_power cp
+		LEFT JOIN cm_role_power_ref crpf ON cp.id = crpf.power_id
+		LEFT JOIN cm_user_role_ref curr ON crpf.role_id = curr.role_id
+		WHERE curr.user_id = 1 AND cp.parent_id = #{id} AND soft = 'menu'
+		ORDER BY `level`
   </select>
 </mapper>
