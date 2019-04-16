@@ -9,13 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import mess.wkb.cm.code.po.CmUserPO;
 import mess.wkb.cm.code.service.CmUserService;
 import mess.wkb.cm.tool.util.ObjectUtil;
-import mess.wkb.cm.tool.util.code.MD5;
 import mess.wkb.cm.tool.web.MysqlDBException;
-import mess.wkb.cm.tool.web.WebContext;
 
  
 @Controller
-@RequestMapping(value = "login")
 public class BackCtrl{
 
 	@Autowired
@@ -28,49 +25,35 @@ public class BackCtrl{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "/login")
 	public ModelAndView login(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
-		String account = request.getParameter("TPL_username");
-		String password = request.getParameter("TPL_password");
+		String account = request.getParameter("userinp");
+		String password = request.getParameter("password");
 //		Long loginTime = Long.parseLong(request.getParameter("loginTime"));
 		if (ObjectUtil.isEmpty(account)) {
 			mv.addObject("erro", "账号不能为空");
-			mv.setViewName("login");
+			mv.setViewName("redirect:html/login.html");
 			return mv;
 		}
 		if (ObjectUtil.isEmpty(password)) {
 			mv.addObject("erro", "密码不能为空");
-			mv.setViewName("login");
+			mv.setViewName("redirect:html/login.html");
 			return mv;
 		}
-//		if (ObjectUtil.isEmpty(loginTime)) {
-//			mv.addObject("erro", "网络错误，请重新登录");
-//			mv.setViewName("../login");
-//			return mv;
-//		}
 		CmUserPO user = new CmUserPO();
-		user.setPassword(MD5.MD5Encode(password));
-		System.out.println(MD5.MD5Encode(password));
+		user.setPassword(password);
 		user.setAccount(account);
 		//对比密码
 		try {
 			CmUserPO TCmUserPO=TuserService.getCmUserByParam(user);
 			if(!ObjectUtil.isEmpty(TCmUserPO)){
-//				TCmUserPO.setLastTime(loginTime);
-//				TuserService.updateCmUser(TCmUserPO);
-				if (TCmUserPO.getState()=="1") {
-					mv.addObject("user", TCmUserPO);
-					mv.setViewName("index");
-				}
-				else {
-					mv.setViewName("usermain");
-				}
+				mv.addObject("user", TCmUserPO);
+				mv.setViewName("redirect:html/index.html");
 				System.out.println(TCmUserPO);
-				WebContext.setSessionAttribute("userInfo", TCmUserPO);
 			}else{
 				mv.addObject("erro", "账号或密码错误");
-				mv.setViewName("login");
+				mv.setViewName("redirect:html/login.html");
 			}
 		} catch (MysqlDBException e) {
 			e.printStackTrace();

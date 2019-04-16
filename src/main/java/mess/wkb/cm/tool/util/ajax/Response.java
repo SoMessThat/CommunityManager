@@ -18,6 +18,8 @@ import java.util.Map;
 * @date 2012-7-6 下午4:53:30 
 * @version V1.0
  */
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)  
 public class Response<T> implements Serializable{
 	
 	//成功
