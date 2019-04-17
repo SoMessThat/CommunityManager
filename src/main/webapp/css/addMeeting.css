@@ -1,0 +1,33 @@
+label.layui-form-label.col10{
+	width: 10%;
+	margin-left: 3%;
+	
+}
+label.layui-form-label.col20{
+	width: 20%
+}
+label.layui-form-label.col30{
+	width: 30%
+}
+.layui-input-inline.col52{
+    width: 54.5%;
+}
+label.layui-form-label.col60{
+	width: 60%
+}
+label.layui-form-label.col70{
+	width: 70%
+}
+label.layui-form-label.col80{
+	width: 80%
+}
+.layui-form-item.layui-form-text.col62 {
+    width: 64.5%;
+    margin-left: 3%;
+}
+.layui-input-inline.twoCol {
+    margin-right: 0px;
+}
+.layui-input-inline.col20 {
+	width: 20.8%;
+}

@@ -1,0 +1,55 @@
+<!-- <link rel="stylesheet" type="text/css" href="../css/meetingList.css"/> -->
+<div>
+	<form  id="cmAttendancelistform" class="layui-form" style="margin-top: 5px">
+		<div class="layui-input-inline">
+			<input type="text" id="id" name="id" placeholder="id" class="layui-input" style="width:100px">
+        <ul class="1" ><li>id</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="name" name="name" placeholder="name" class="layui-input" style="width:100px">
+        <ul class="1" ><li>name</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="content" name="content" placeholder="content" class="layui-input" style="width:100px">
+        <ul class="1" ><li>content</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="place" name="place" placeholder="place" class="layui-input" style="width:100px">
+        <ul class="1" ><li>place</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="creatTime" name="creatTime" placeholder="creatTime" class="layui-input" style="width:100px">
+        <ul class="1" ><li>creatTime</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="beginTime" name="beginTime" placeholder="beginTime" class="layui-input" style="width:100px">
+        <ul class="1" ><li>beginTime</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="endTime" name="endTime" placeholder="endTime" class="layui-input" style="width:100px">
+        <ul class="1" ><li>endTime</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="departmentId" name="departmentId" placeholder="departmentId" class="layui-input" style="width:100px">
+        <ul class="1" ><li>departmentId</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="userName" name="userName" placeholder="userName" class="layui-input" style="width:100px">
+        <ul class="1" ><li>userName</li></ul>
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" id="state" name="state" placeholder="state" class="layui-input" style="width:100px">
+        <ul class="1" ><li>state</li></ul>
+		</div>
+		
+  		<input class="layui-btn layui-btn-small layui-btn-normal" id="addCmAttendance" value="新增" style="width:100px" />
+		<button id="resetbtn" type="reset" class="layui-btn layui-btn-small layui-btn-warm">清空</button>
+	</form>
+	<table id="cmAttendancelist" lay-filter="cmAttendancelist"></table>
+</div>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="../plugs/jquery.min.js"></script>
+<script src="../js/meetingList.js"></script>

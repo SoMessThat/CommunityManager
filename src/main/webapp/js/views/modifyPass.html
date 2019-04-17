@@ -4,8 +4,8 @@
       <h2>layuiAdmin</h2>
       <p>layui 官方出品的单页面后台管理模板系统</p>
     </div>
-    <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
-    
+    <div id="Form1" class="layadmin-user-login-box layadmin-user-login-body layui-form">
+    <form method="post">
     	<div class="layui-form-item"> 
 	    	<label class="layadmin-user-login-icon layui-icon layui-icon-cellphone" for="LAY-user-login-cellphone"></label> 
 	    	<input type="text" name="cellphone" id="LAY-user-login-cellphone" lay-verify="phone" placeholder="请输入注册时的手机号" class="layui-input">
@@ -19,7 +19,8 @@
 			    </div> 
 			    <div class="layui-col-xs5"> 
 			    	<div style="margin-left: 10px;"> 
-			    		<img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode"> 
+			    		<!-- <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode"> -->
+			    		<canvas id="canvas" style="width: 100%;height: 35"></canvas> 
 			    	</div> 
 			    </div> 
 		    </div> 
@@ -28,23 +29,23 @@
 		    <div class="layui-row"> 
 			    <div class="layui-col-xs7"> 
 				    <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-smscode"></label> 
-				    <input type="text" name="vercode" id="LAY-user-login-smscode" lay-verify="required" placeholder="短信验证码" class="layui-input"> 
+				    <input type="text" name="vercode" id="LAY-user-login-smscode" placeholder="短信验证码" class="layui-input"> 
 			    </div> 
 			    <div class="layui-col-xs5"> 
 				    <div style="margin-left: 10px;"> 
-				    	<button type="button" class="layui-btn layui-btn-primary layui-btn-fluid" id="LAY-user-forget-getsmscode">获取验证码</button> 
+				    	<input type="button" id="get" lay-submit lay-filter="get" class="layui-btn layui-btn-primary layui-btn-fluid" id="LAY-user-forget-getsmscode" value="获取验证码"></input> 
 				    </div> 
 			    </div> 
 		    </div> 
 	    </div> 
 	    <div class="layui-form-item"> 
-	    	<button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-forget-submit">找回密码</button> 
+	    	<input id="go" class="layui-btn layui-btn-fluid" lay-submit lay-filter="go" value="找回密码"></input> 
 	    </div>  
- 
+ 	</form>
     </div>
     
     
-    <div class="layadmin-user-login-box layadmin-user-login-body layui-form" style="display: none;">
+    <div id="Form2" class="layadmin-user-login-box layadmin-user-login-body layui-form" style="display: none;">
     
 	    <div class="layui-form-item"> 
 		    <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label> 
@@ -55,11 +56,12 @@
 		    <input type="password" name="repass" id="LAY-user-login-repass" lay-verify="required" placeholder="确认密码" class="layui-input"> 
 	    </div> 
 	    <div class="layui-form-item"> 
-		    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-forget-resetpass">重置新密码</button> 
+		    <button id="LAY-user-forget-resetpass" class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-forget-resetpass">重置新密码</button> 
 	    </div>  
  
     </div>
     
 </div>
-
+<script src="../plugs/MD5/md5.js"></script>
+<script src="../plugs/jquery.min.js"></script>
 <script src="../js/modifyPass.js"></script>
