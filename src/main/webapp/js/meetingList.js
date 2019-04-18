@@ -1,4 +1,20 @@
 $(function(){
+	
+	$.ajax({
+		url:'../CmAttendance/updateCmAttendanceById.do',
+		type:'post',
+		data: {
+			cmAttendance_departmentId:1
+		},
+		error:function (res) {
+			layer.alert('网络错误!');
+		},
+		success : function(layero, index){
+			a
+		},
+	});
+	
+	
 	layui.use(['layer', 'table','element','form','laydate'], function(){
 		var layer = layui.layer, 
 		table = layui.table, 
@@ -12,9 +28,9 @@ $(function(){
 			elem: '#cmAttendancelist',
 			url: '../CmAttendance/queryPageCmAttendance.do',
 			//   toolbar: '#barDemo',
-			data:[
-			      departmentId=1
-			      ],
+			where:{
+				cmAttendance_departmentId:1
+			},
 			limit:10,	
 			limits:[5,10,15,20],
 			toolbar: true,
@@ -28,16 +44,13 @@ $(function(){
 				,dataName: 'data' //数据列表的字段名称，默认：data
 			},
 			cols: [[ //表头
-			         {column:"id", title: '', width:200, fixed: 'left' }  ,
-			         {column:"name", title: '', width:200, fixed: 'left' }  ,
-			         {column:"content", title: '', width:200, fixed: 'left' }  ,
-			         {column:"place", title: '', width:200, fixed: 'left' }  ,
-			         {column:"creatTime", title: '', width:200, fixed: 'left' }  ,
-			         {column:"beginTime", title: '', width:200, fixed: 'left' }  ,
-			         {column:"endTime", title: '', width:200, fixed: 'left' }  ,
-			         {column:"departmentId", title: '', width:200, fixed: 'left' }  ,
-			         {column:"userName", title: '', width:200, fixed: 'left' }  ,
-			         {column:"state", title: '', width:200, fixed: 'left' }  ,
+			         {field:"name", title: '会议名称', width:200, fixed: 'left' }  ,
+			         {field:"creatTime", title: '创建时间', width:200, fixed: 'left' }  ,
+			         {field:"beginTime", title: '开始时间', width:200, fixed: 'left' }  ,
+			         {field:"endTime", title: '结束时间', width:200, fixed: 'left' }  ,
+			         {field:"departmentId", title: '部门', width:200, fixed: 'left' }  ,
+			         {field:"userName", title: '发起人', width:200, fixed: 'left' }  ,
+			         {field:"state", title: '状态', width:200, fixed: 'left' }  ,
 			         {fixed: 'right', title: '操作',width: 150, align:'center', toolbar: '#barDemo'}
 			         ]]
 		});
