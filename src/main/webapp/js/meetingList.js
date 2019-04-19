@@ -1,7 +1,7 @@
 $(function(){
 	
 	$.ajax({
-		url:'../CmAttendance/updateCmAttendanceById.do',
+		url:'../CmAttendance/queryPageCmAttendance.do',
 		type:'post',
 		data: {
 			cmAttendance_departmentId:1
@@ -10,7 +10,13 @@ $(function(){
 			layer.alert('网络错误!');
 		},
 		success : function(layero, index){
-			a
+			var div1 = document.getElementById("MeetingDemo");
+			div1.append('<div class="ResultList "><div class="ResultCont" style="width:  80%; margin-left: 10%; "><div class="title">'+
+				'<a href="" target="_blank"><em>小灰：</em>2019年度年终大会</a><a href="javascript:void(0)">'+
+				'<i class="icon icon_Miner" id="icon1" onclick="showBox(this.id,"zglsdllc201901004","perio")" title="WFMetrics" style="margin-left: 0px;"></i> </a></div>');
+			div1.append('<div class="ResultMoreinfo"> <div class="author"> <span class="resultResouceType">自律会学风督导部</span> <a href="" target="_blank">小灰</a>'+
+				'</div> <div class="Label periodical_label"> <span class="blockspan">T-501</span> </div> <div class="Volume">'+
+				' <a href="" target="_blank">2019-04-18 12:00:00</a> </div> </div>');
 		},
 	});
 	
