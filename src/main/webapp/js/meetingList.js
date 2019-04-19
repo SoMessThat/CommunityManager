@@ -4,186 +4,71 @@ $(function(){
 		url:'../CmAttendance/queryPageCmAttendance.do',
 		type:'post',
 		data: {
-			cmAttendance_departmentId:1
+			cmAttendance_departmentId:1,
+			page:1,
+			limit:5
 		},
+		dataType:'json',
 		error:function (res) {
-			layer.alert('网络错误!');
+//			layer.alert('网络错误!');
 		},
-		success : function(layero, index){
-			var div1 = document.getElementById("MeetingDemo");
-			div1.append('<div class="ResultList "><div class="ResultCont" style="width:  80%; margin-left: 10%; "><div class="title">'+
-				'<a href="" target="_blank"><em>小灰：</em>2019年度年终大会</a><a href="javascript:void(0)">'+
-				'<i class="icon icon_Miner" id="icon1" onclick="showBox(this.id,"zglsdllc201901004","perio")" title="WFMetrics" style="margin-left: 0px;"></i> </a></div>');
-			div1.append('<div class="ResultMoreinfo"> <div class="author"> <span class="resultResouceType">自律会学风督导部</span> <a href="" target="_blank">小灰</a>'+
-				'</div> <div class="Label periodical_label"> <span class="blockspan">T-501</span> </div> <div class="Volume">'+
-				' <a href="" target="_blank">2019-04-18 12:00:00</a> </div> </div>');
-		},
-	});
-	
-	
-	layui.use(['layer', 'table','element','form','laydate'], function(){
-		var layer = layui.layer, 
-		table = layui.table, 
-		element = layui.element, 
-		laydate = layui.laydate,
-		laypage=layui.laypage,
-		form = layui.form,
-		$ = layui.$;
-
-		table.render({
-			elem: '#cmAttendancelist',
-			url: '../CmAttendance/queryPageCmAttendance.do',
-			//   toolbar: '#barDemo',
-			where:{
-				cmAttendance_departmentId:1
-			},
-			limit:10,	
-			limits:[5,10,15,20],
-			toolbar: true,
-			page:true, //开启分页
-			height:'500px',
-			response: {
-				statusName: 'status' //数据状态的字段名称，默认：code
-				,statusCode: 200//成功的状态码，默认：0
-				,msgName: 'messages' //状态信息的字段名称，默认：msg
-				,countName: 'count' //数据总数的字段名称，默认：count
-				,dataName: 'data' //数据列表的字段名称，默认：data
-			},
-			cols: [[ //表头
-			         {field:"name", title: '会议名称', width:200, fixed: 'left' }  ,
-			         {field:"creatTime", title: '创建时间', width:200, fixed: 'left' }  ,
-			         {field:"beginTime", title: '开始时间', width:200, fixed: 'left' }  ,
-			         {field:"endTime", title: '结束时间', width:200, fixed: 'left' }  ,
-			         {field:"departmentId", title: '部门', width:200, fixed: 'left' }  ,
-			         {field:"userName", title: '发起人', width:200, fixed: 'left' }  ,
-			         {field:"state", title: '状态', width:200, fixed: 'left' }  ,
-			         {fixed: 'right', title: '操作',width: 150, align:'center', toolbar: '#barDemo'}
-			         ]]
-		});
-
-		//监听行工具事件
-		table.on('tool(cmAttendancelist)', function(obj){
-			if(obj.event === 'del'){
-				layer.confirm('真的删除行么', function(index){
-					var id = obj.data.id;
-					$.ajax({
-						url:BASE_PATH+'/CmAttendance/delCmAttendance.do',
-						type:'get',
-						dataType:'text',
-						data:{
-							id:id
-						},
-						error:function (res) {
-							layer.alert(res.errors);
-						},
-						success:function (res) {
-							layer.alert('保存成功!',function(){
-								layer.closeAll();
-								table.reload('cmAttendancelist');
-							});
-							obj.del();
-						}
-					});
-				});
-			} else if(obj.event === 'edit'){
-				layer.open({
-					type: 2,
-					skin: 'layui-layer-rim',
-					title: '编辑房间信息',
-					btn: ['保存'],
-					btnAlign: 'c',
-					shadeClose: true,
-					shade: true,
-					maxmin: false,
-					area: ['70%', '80%'],
-					content: BASE_PATH+'../editCmAttendance.html',
-					success : function(layero, index){
-						var body = layer.getChildFrame('body', index);
-						var iframeWin = window[layero.find('iframe')[0]['name']];
-						var dialogform = iframeWin.layui.form;
-						var id = obj.data.id;
-						//设置不可编辑
-						//body.find("input#roomcode").attr("disabled",true);
-						//body.find("select#roomfloor").attr("disabled",true);
-						$.ajax({
-							url:BASE_PATH+'/CmAttendance/findCmAttendanceById.do',
-							type:'get',
-							dataType:'json',
-							async:true,  //异步加载
-							data:{
-								'id':id
-							},
-							error:function (res) {
-								layer.alert(res.data.erro);
-							},
-							success : function(data){
-								body.find("input#id").val(data.data.id),
-								body.find("input#name").val(data.data.name),
-								body.find("input#content").val(data.data.content),
-								body.find("input#place").val(data.data.place),
-								body.find("input#creatTime").val(data.data.creatTime),
-								body.find("input#beginTime").val(data.data.beginTime),
-								body.find("input#endTime").val(data.data.endTime),
-								body.find("input#departmentId").val(data.data.departmentId),
-								body.find("input#userName").val(data.data.userName),
-								body.find("input#state").val(data.data.state)
-								//dialogform.render('select');
-
-							},
-						});
-					},
-					yes: function (layero, index) {
-						var body = layui.layer.getChildFrame('body', layero); //得到iframe页的body内容
-						//获取值弹出框值
-//						var id=body.find("input#id").val(),
-//						var name=body.find("input#name").val(),
-//						var content=body.find("input#content").val(),
-//						var place=body.find("input#place").val(),
-//						var creatTime=body.find("input#creatTime").val(),
-//						var beginTime=body.find("input#beginTime").val(),
-//						var endTime=body.find("input#endTime").val(),
-//						var departmentId=body.find("input#departmentId").val(),
-//						var userName=body.find("input#userName").val(),
-//						var state=body.find("input#state").val(),
-						//判断是否为空
-						/*if(roomCode==""||roomFloor==""||roomType==""||roomState==""||roomPrix==""){
-		    				layer.alert('请输入完整信息!');
-		    			}
-		    			else {*/ 	
-						$.ajax({
-							url:'../CmAttendance/updateCmAttendanceById.do',
-							type:'get',
-							data: {
-								id:body.find("input#id").val(),
-								name:body.find("input#name").val(),
-								content:body.find("input#content").val(),
-								place:body.find("input#place").val(),
-								creatTime:body.find("input#creatTime").val(),
-								beginTime:body.find("input#beginTime").val(),
-								endTime:body.find("input#endTime").val(),
-								departmentId:body.find("input#departmentId").val(),
-								userName:body.find("input#userName").val(),
-								state:body.find("input#state").val(),
-							},
-							error:function (res) {
-								layer.alert('网络错误!');
-							},
-							success : function(layero, index){
-								layer.alert('修改成功!',function(){
-									layer.closeAll();
-									table.reload('cmAttendancelist');
-								});
-							},
-						});
-						//}
-
-					}
-				});
+		success : function(data){
+			for (var i = 0; i < data.count; i++) {
+				$("#MeetingDemo").append('<div class="ResultCont" style="width:  80%; margin-left: 10%; ">'+
+						'<div class="title">'+
+						'<a href="" target="_blank"><em>'+data.data[i].userName+':</em>'+data.data[i].name+'</a>'+
+						'<a href="javascript:void(0)">'+
+						'<i class="icon icon_Miner" id="icon1" onclick="showBox(this.id,"zglsdllc201901004","perio")" title="WFMetrics" style="margin-left: 0px;"></i>'+
+						'</a>'+
+						'</div>'+
+						'<div class="ResultMoreinfo">'+
+						'<div class="author">'+
+						'<span class="resultResouceType">'+data.data[i].departmentId+'</span>'+
+						'<a href="" target="_blank">'+data.data[i].userName+'</a>'+
+						'</div>'+
+						'<div class="Label periodical_label">'+
+						'<span class="blockspan">'+data.data[i].place+'</span>'+
+						'</div>'+
+						'<div class="Volume">'+
+						'<a href="" target="_blank">'+data.data[i].creatTime+'</a>'+
+						'</div>'+
+						'</div>'+
+						'<div class="summary">'+
+						'摘要：通过对《扁舟过三峡》等书的考证,可知<em>19</em><em>世纪</em>'+data.data[i].content+''+
+						'</div>'+
+						'<div class="Keyword">'+
+						'<a><span>开始时间：</span><span>'+data.data[i].beginTime+'</span></a>'+
+						'<a><span>结束时间：</span><span>'+data.data[i].endTime+'</span></a>'+
+						'</div>'+
+						'<div class="result_new_operaWrap clear">'+
+						'<div class="result_new_operaLeft result_new_operaItem">'+
+						'<ul class="clear result_new_listOperaWrap">'+
+						'<div class="Mbtn">'+
+						'<li><a href="javascript:void(0)" class="result_opera_subscribe " id="col1" onclick="collectionOne("zglsdllc201901004","perio",this.id)">'+
+						'<i></i> <span>收藏</span>'+
+						'</a></li>'+
+						'<li><a href="javascript:void(0)" class="result_opera_share" type="0" data-type="shareDiv1"><i></i><span>分享</span> </a>'+
+						'</li>'+
+						'</div>'+
+						'</ul>'+
+						'</div>'+
+						'<div class="result_new_operaCenter result_new_operaItem">'+
+						'<ul class="clear">'+
+						'</ul>'+
+						'</div>'+
+						'<div class="result_new_operaRight result_new_operaItem">'+
+						'<ul class="clear">'+
+						'<li><a href="javascript:void(0)" class="result_new_opera_otherWay"> 被引：<span style="left: 43px;">0</span>'+
+						'</a></li>'+
+						'<li></li>'+
+						'</ul>'+
+						'</div>'+
+						'</div>'+
+				'</div>');
 			}
-		});
-
+		},
 	});
-
+	
 	//查询条件监听
 	layui.use(['form','table','layedit', 'laydate'], function(){
 		var form = layui.form,
