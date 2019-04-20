@@ -7,12 +7,6 @@ $(function(){
 				cmAttendance_departmentId:1,
 				page:1,
 				limit:5,
-				cmAttendance_name: $("#name").val(),
-				cmAttendance_content: $("#content").val(),
-				cmAttendance_place: $("#place").val(),
-				cmAttendance_beginTime: $("#beginTime").val(),
-				cmAttendance_userName: $("#userName").val(),
-				cmAttendance_state: $("#state").val()
 			},
 			dataType:'json',
 			error:function (res) {
@@ -39,12 +33,6 @@ $(function(){
 							cmAttendance_departmentId:1,
 							page:obj.curr,
 							limit:obj.limit,
-							cmAttendance_name: $("#name").val(),
-							cmAttendance_content: $("#content").val(),
-							cmAttendance_place: $("#place").val(),
-							cmAttendance_beginTime: $("#beginTime").val(),
-							cmAttendance_userName: $("#userName").val(),
-							cmAttendance_state: $("#state").val()
 						},
 						dataType:'json',
 						success : function(data){
@@ -82,10 +70,8 @@ $(function(){
 										'<ul class="clear result_new_listOperaWrap">'+
 										'<div class="Mbtn">'+
 										'<li><a href="javascript:void(0)" class="result_opera_subscribe " id="col1" onclick="collectionOne("zglsdllc201901004","perio",this.id)">'+
-										'<i></i> <span>收藏</span>'+
+										'<i style="background: url(../images/hand.png) no-repeat center center; background-size: cover;"></i> <span>收到</span>'+
 										'</a></li>'+
-										'<li><a href="javascript:void(0)" class="result_opera_share" type="0" data-type="shareDiv1"><i></i><span>分享</span> </a>'+
-										'</li>'+
 										'</div>'+
 										'</ul>'+
 										'</div>'+
@@ -95,7 +81,8 @@ $(function(){
 										'</div>'+
 										'<div class="result_new_operaRight result_new_operaItem">'+
 										'<ul class="clear">'+
-										'<li><a href="javascript:void(0)" class="result_new_opera_otherWay"> 被引：<span style="left: 43px;">0</span>'+
+										'<li><a href="javascript:void(0)" class="result_new_opera_otherWay">'+
+										'<input class="layui-btn layui-btn-small layui-btn-normal see" id="modify" value="查看">'+
 										'</a></li>'+
 										'<li></li>'+
 										'</ul>'+
@@ -109,58 +96,4 @@ $(function(){
 			});
 		});
 	}
-	layui.use(['form','laypage', 'laydate'], function(){
-		var form = layui.form,
-		laypage = layui.laypage,
-		laydate = layui.laydate,
-		$ = layui.$;
-
-		$("#name").bind('input propertychange', function () {
-			intiContent();
-		});
-		$("#content").bind('input propertychange', function () {
-			intiContent();
-		});
-		$("#place").bind('input propertychange', function () {
-			intiContent();
-		});
-		$("#beginTime").bind('input propertychange', function () {
-			intiContent();
-		});
-		$("#userName").bind('input propertychange', function () {
-			intiContent();
-		});
-		$("#state").bind('input propertychange', function () {
-			intiContent();
-		});
-		/*下拉框
-	      form.on('select(roomfloor)', function(data){
-	   		table.reload('roomlist', {
-			        page: {
-			          curr: 1 //重新从第 1 页开始
-			        },
-			        where: {
-			        	roomcode:$('#roomcode').val(),
-	  	            	roomfloor:$('#roomfloor').val(),
-	  	            	roomtype:$('#roomtype').val(),
-	  	            	roomstate:$('#roomstate').val(),
-		            	roomprix:$('#roomprix').val()
-			        }
-		      });
-	  	    });
-		 */
-
-		$("#resetbtn").on('click',function(){
-			reset();
-			intiContent();
-		});
-		var reset = function (){
-			$("#name").val('');
-			$("#content").val('');
-			$("#place").val('');
-			$("#beginTime").val('');
-			$("#userName").val('');
-			$("#state").val('');
-		}
-	});
 });

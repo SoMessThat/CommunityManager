@@ -206,7 +206,7 @@
 }
 
 .right_sidebar .SidebarBox .video .stop {
-	background: url(../images/result_list_icons.png) no-repeat -67px -77px;
+/* 	background: url(../images/result_list_icons.png) no-repeat -67px -77px; */
 	width: 30px;
 	height: 30px;
 	position: absolute;
@@ -272,7 +272,7 @@
 }
 
 .right_sidebar .SidebarBox .video .brief_check .time span{
-	background: url(../images/result_list_icons.png) no-repeat -20px -78px;
+/* 	background: url(../images/result_list_icons.png) no-repeat -20px -78px; */
 	width: 17px;
 	height:17px;
 	display: block;
@@ -308,7 +308,7 @@
 	height: 15px;
 	display: inline-block;
 	vertical-align: middle;
-	background: url(../images/result_list_icons.png) no-repeat;
+/* 	background: url(../images/result_list_icons.png) no-repeat; */
 	background-position: -16px -44px;
 }
 
@@ -569,13 +569,13 @@
 	text-align: center;
 }
 .searchPageWrap_r ul li.searchPageWrap_prev>a{
-	background: url(../images/result_list_icons.png) no-repeat -12px -34px;
+/* 	background: url(../images/result_list_icons.png) no-repeat -12px -34px; */
 	display: inline-block;
 	width: 5px;
 	height: 8px;
 }
 .searchPageWrap_r ul li.searchPageWrap_next>a{
-	background: url(../images/result_list_icons.png) no-repeat -19px -34px;
+/* 	background: url(../images/result_list_icons.png) no-repeat -19px -34px; */
 	display: inline-block;
 	width: 5px;
 	height: 8px;
@@ -628,7 +628,7 @@
 	background: none;
 }
 .stateRelevant ul li.on span,.stateRelevant ul li:hover span{
-	background: url(../images/result_list_icons.png) no-repeat 0 -9px;
+/* 	background: url(../images/result_list_icons.png) no-repeat 0 -9px; */
 }
 
 .ResultBlock {
@@ -1022,7 +1022,7 @@
 }
 
 .result_new_operaWrap .result_new_operaLeft ul.result_new_listOperaWrap li>a>i{
-	background: url(../images/result_list_icons.png);
+/* 	background: url(../images/result_list_icons.png); */
 	width: 16px;
 	height: 16px;
 	display: block;
@@ -1031,7 +1031,7 @@
 	left: 7px;
 }
 .result_new_operaWrap .result_new_operaLeft ul.result_new_listOperaWrap li>a.result_opera_ibook>i{
-	background: url(../images/result_list_icons.png);
+/* 	background: url(../images/result_list_icons.png); */
 	width: 16px;
 	height: 16px;
 	display: block;
@@ -1116,7 +1116,7 @@
 
 
 .result_new_operaWrap .result_new_operaLeft ul.result_new_listOperaWrap li>a:hover>i{
-	background: url(../images/result_list_icons.png);
+/* 	background: url(../images/result_list_icons.png); */
 	width: 16px;
 	height: 16px;
 	background-position: -50px -61px;
@@ -1126,7 +1126,7 @@
 	left: 12px;
 }
 .result_new_operaWrap .result_new_operaLeft ul.result_new_listOperaWrap li>a.result_opera_intensive_ibook:hover>i{
-	background: url(../images/intensive_reading_hover_icon.png);
+/* 	background: url(../images/intensive_reading_hover_icon.png); */
 	width: 15px;
 	height: 15px;
 	display: block;
@@ -1228,7 +1228,7 @@
 }
 .del{
 	height:14px;
-	background: url(../images/result_list_icons.png) no-repeat -47px 1px;
+/* 	background: url(../images/result_list_icons.png) no-repeat -47px 1px; */
 }
 .result_new_operaWrap .result_new_operaCenter ul li:last-child>i,.fenxi_pop .fenxi_block .middleCont ul li i{
 	display:none;
@@ -4375,7 +4375,7 @@ table.survey {
 }
 
 .ResultCont .brief .OperatBtn3 .icon_share {
-	background: url(../images/result_list_icons.png) no-repeat;
+/* 	background: url(../images/result_list_icons.png) no-repeat; */
 	background-position: 4px -43px;
 }
 
@@ -6559,4 +6559,42 @@ table.survey {
 	height: 15px;
 	z-index: 1;
 	background: #e6e6e6;
+}
+
+input.layui-btn.layui-btn-small.layui-btn-normal.see{
+    padding: 0px;
+    width: 30%;
+    color: transparent;
+    text-shadow: 0 0 0 #f2fcf0;
+    background-color: #49ccdd;
+    position: relative;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    letter-spacing: -0.18px;
+    text-align: center;
+}
+
+span.seats-block.seat {
+	white-space: nowrap;
+    margin-bottom: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    width: 30px;
+    height: 26px;
+    line-height: 26px;
+    background-position: 0 1px;
+    background-size: cover;
+}
+span.seats-block.seat.null {
+    background: url(../images/nullSeat.png) no-repeat center center;
+}
+span.seats-block.seat.full {
+    background: url(../images/fullSeat.png) no-repeat center center;
+}
+.seats-block .row {
+    white-space: nowrap;
+    margin-bottom: 10px;
+    text-align: center;
 }

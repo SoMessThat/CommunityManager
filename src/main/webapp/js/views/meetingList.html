@@ -1,31 +1,26 @@
 <link rel="stylesheet" type="text/css" href="../css/meetingList.css"/>
+<div style="width:  80%; padding-top: 24px; margin-left: 10%;background-color: #ffffff">
 <div>
-	<form  id="cmAttendancelistform" class="layui-form" style="margin-top: 5px">
+	<form  id="cmAttendancelistform" class="layui-form" style="margin-top: 5px;padding-bottom:24px;padding-left: 24px; border-bottom: 1px solid #ddd;">
 		<div class="layui-input-inline">
-			<input type="text" id="name" name="name" placeholder="name" class="layui-input" style="width:100px">
-        <ul class="1" ><li>name</li></ul>
+			<input type="text" id="name" name="name" placeholder="会议名称" class="layui-input" style="width:100px">
 		</div>
 		<div class="layui-input-inline">
-			<input type="text" id="content" name="content" placeholder="content" class="layui-input" style="width:100px">
-        <ul class="1" ><li>content</li></ul>
+			<input type="text" id="content" name="content" placeholder="会议内容" class="layui-input" style="width:100px">
 		</div>
 		<div class="layui-input-inline">
-			<input type="text" id="place" name="place" placeholder="place" class="layui-input" style="width:100px">
-        <ul class="1" ><li>place</li></ul>
+			<input type="text" id="place" name="place" placeholder="会议地点" class="layui-input" style="width:100px">
 		</div>
 		<div class="layui-input-inline">
-			<input type="text" id="beginTime" name="beginTime" placeholder="beginTime" class="layui-input" style="width:100px">
-        <ul class="1" ><li>beginTime</li></ul>
+			<input type="text" id="beginTime" name="beginTime" placeholder="会议日期" class="layui-input" style="width:100px">
 		</div>
 		<div class="layui-input-inline">
-			<input type="text" id="userName" name="userName" placeholder="userName" class="layui-input" style="width:100px">
-        <ul class="1" ><li>userName</li></ul>
+			<input type="text" id="userName" name="userName" placeholder="发布人" class="layui-input" style="width:100px">
 		</div>
 		<div class="layui-input-inline">
-			<input type="text" id="state" name="state" placeholder="state" class="layui-input" style="width:100px">
-        <ul class="1" ><li>state</li></ul>
+			<input type="text" id="state" name="state" placeholder="状态" class="layui-input" style="width:100px">
+<!--         <ul class="1" ><li>state</li></ul> -->
 		</div>
-  		<input class="layui-btn layui-btn-small layui-btn-normal" id="addCmAttendance" value="新增" style="width:100px" />
 		<button id="resetbtn" type="reset" class="layui-btn layui-btn-small layui-btn-warm">清空</button>
 	</form>
 </div>
@@ -33,15 +28,15 @@
 <div class="ResultBlock">
 	<div  id="MeetingDemo"  class="ResultList ">
 		
-		<div class="ResultCont" style="width:  80%; margin-left: 10%; ">
+		<div class="ResultCont">
 			<div class="title">
 <!-- 				<span class="result_item_index">1.</span>  -->
 				<a href="" target="_blank"><em>小灰：</em>2019年度年终大会</a>
 
 				<a href="javascript:void(0)">
-				 <i class="icon icon_Miner" id="icon1" onclick="showBox(this.id,'zglsdllc201901004','perio')" title="WFMetrics" style="margin-left: 0px;"></i>
+				 <i class="icon icon_Miner" id="icon1"  title="已结束" style="margin-left: 0px; background: url(../images/Ended.png) no-repeat center center; background-size: cover;"></i>
 				</a>
-
+<!-- onclick="showBox(this.id,'zglsdllc201901004','perio')" -->
 			</div>
 <!-- 			<div class="icon_box" style="display: none;">
 				<div class="horn"></div>
@@ -118,6 +113,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id="page" style="margin-top: 5px;padding-left: 24px;"></div>
 </div>
 	<script src="../plugs/jquery.min.js"></script>
 	<script src="../js/meetingList.js"></script>
