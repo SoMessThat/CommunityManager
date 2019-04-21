@@ -1,4 +1,14 @@
 $(function(){
+	$('#myscroll').myScroll({
+		speed: 40, //数值越大，速度越慢
+		rowHeight: 26 //li的高度
+	});
+	for (var row = 0; row < 5; row++) {
+		for (var col = 0; col < 10; col++) {
+			$("#seat").append('<span class="seats-block seat null">'+(row*10+col)+'</span>');
+		}
+		$("#seat").append('<br/>');
+	}
 	var intiContent = function () {	
 		$.ajax({
 			url:'../CmAttendance/queryPageCmAttendance.do',
