@@ -99,6 +99,8 @@ public class CmAttendanceService extends BaseService<CmAttendancePO>{
 		
         if(!ObjectUtil.isEmpty(obj.getId()))q.addEq("id", obj.getId()); 
         if(!ObjectUtil.isEmpty(obj.getName()))q.addEq("name", obj.getName()); 
+        if(!ObjectUtil.isEmpty(obj.getContent()))q.addEq("content", obj.getContent()); 
+        if(!ObjectUtil.isEmpty(obj.getPlace()))q.addEq("place", obj.getPlace()); 
         if(!ObjectUtil.isEmpty(obj.getCreatTime()))q.addEq("creatTime", obj.getCreatTime()); 
         if(!ObjectUtil.isEmpty(obj.getBeginTime()))q.addEq("beginTime", obj.getBeginTime()); 
         if(!ObjectUtil.isEmpty(obj.getEndTime()))q.addEq("endTime", obj.getEndTime()); 
@@ -128,6 +130,8 @@ public class CmAttendanceService extends BaseService<CmAttendancePO>{
 		
         if(!ObjectUtil.isEmpty(obj.getId()))q.addEq("id", obj.getId());
         if(!ObjectUtil.isEmpty(obj.getName()))q.addEq("name", obj.getName());
+        if(!ObjectUtil.isEmpty(obj.getContent()))q.addEq("content", obj.getContent());
+        if(!ObjectUtil.isEmpty(obj.getPlace()))q.addEq("place", obj.getPlace());
         if(!ObjectUtil.isEmpty(obj.getCreatTime()))q.addEq("creatTime", obj.getCreatTime());
         if(!ObjectUtil.isEmpty(obj.getBeginTime()))q.addEq("beginTime", obj.getBeginTime());
         if(!ObjectUtil.isEmpty(obj.getEndTime()))q.addEq("endTime", obj.getEndTime());
@@ -154,6 +158,8 @@ public class CmAttendanceService extends BaseService<CmAttendancePO>{
 		
         if(!ObjectUtil.isEmpty(obj.getId()))q.addEq("id", obj.getId()); 
         if(!ObjectUtil.isEmpty(obj.getName()))q.addEq("name", obj.getName()); 
+        if(!ObjectUtil.isEmpty(obj.getContent()))q.addEq("content", obj.getContent()); 
+        if(!ObjectUtil.isEmpty(obj.getPlace()))q.addEq("place", obj.getPlace()); 
         if(!ObjectUtil.isEmpty(obj.getCreatTime()))q.addEq("creatTime", obj.getCreatTime()); 
         if(!ObjectUtil.isEmpty(obj.getBeginTime()))q.addEq("beginTime", obj.getBeginTime()); 
         if(!ObjectUtil.isEmpty(obj.getEndTime()))q.addEq("endTime", obj.getEndTime()); 
@@ -179,13 +185,15 @@ public class CmAttendanceService extends BaseService<CmAttendancePO>{
 		
         if(!ObjectUtil.isEmpty(obj.getId()))q.addEq("id", obj.getId()); 
         if(!ObjectUtil.isEmpty(obj.getName()))q.addEq("name", obj.getName()); 
+        if(!ObjectUtil.isEmpty(obj.getContent()))q.addEq("content", obj.getContent()); 
+        if(!ObjectUtil.isEmpty(obj.getPlace()))q.addEq("place", obj.getPlace()); 
         if(!ObjectUtil.isEmpty(obj.getCreatTime()))q.addEq("creatTime", obj.getCreatTime()); 
         if(!ObjectUtil.isEmpty(obj.getBeginTime()))q.addEq("beginTime", obj.getBeginTime()); 
         if(!ObjectUtil.isEmpty(obj.getEndTime()))q.addEq("endTime", obj.getEndTime()); 
         if(!ObjectUtil.isEmpty(obj.getDepartmentId()))q.addEq("departmentId", obj.getDepartmentId()); 
         if(!ObjectUtil.isEmpty(obj.getUserName()))q.addEq("userName", obj.getUserName()); 
         if(!ObjectUtil.isEmpty(obj.getState()))q.addEq("state", obj.getState()); 
-		String[] columnProperty = {"id","name","creatTime","beginTime","endTime","departmentId","userName","state"};
+		String[] columnProperty = {"id","name","content","place","creatTime","beginTime","endTime","departmentId","userName","state"};
 		return this.findExpByQuery(q, columnProperty);
 	}
 	

@@ -1,0 +1,137 @@
+    <link rel="stylesheet" href="../css/selfInfo.css">
+    <link rel="stylesheet" type="text/css" href="../css/meetingList.css"/>
+    <style>
+	* { margin: 0; padding: 0;}
+	.myscroll { width: 300px; height: 260px; margin: 0 auto; border: 1px solid #ccc; line-height: 26px; font-size: 12px; overflow: hidden;}
+	.myscroll li { height: 26px; margin-left: 25px;}
+	.myscroll a { color: #333; text-decoration: none;}
+	.myscroll a:hover { color: #ED5565; text-decoration: underline;}
+	</style>
+
+    <div class="resume-center-container">
+        <!--编辑简历 背景区域-->
+        <div class="bg-mask"></div>
+        <div>
+            <div class="resume-container colour-4 rh11">
+                <div class="main-content">
+                    <div class="ResumesList">
+                        <div class="ListRecord">
+<div class="ListItem Educational">
+    <div class="ItemTitle">
+        <span class="title-line"></span>
+        <span class="title">
+            <i>2019年度年终大会</i>
+        </span>
+    </div>
+    <div class="ItemControl">
+                 <div class="ItemList">
+            <div class="ItemRight">
+                <div class="ItemHead">
+                    <span class="resume_key university">自律会学风督导部</span>
+                    <span class="resume_key college">开始时间：2019-01-01 12:00:00</span>
+                    <span class="resume_key degree tr fr">结束时间：2019-01-01 12:00:00</span>
+                </div>
+                <div class="ItemHead">
+                    <span class="resume_key university">摘要：搭搭搭搭是发放大法师暗示法QAQ我去发放啊高风安抚vad暗示啊发我确认去阿发...........</span>
+                </div>
+            </div>
+            <div class="line-box">
+                <div class="line-head"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+             </div>
+</div>
+  <!--实习经历-->
+<div class="ListItem Internship">
+    <div class="ItemTitle">
+        <span class="title-line"></span>
+        <span class="title">
+            <i>详细情况</i>
+        </span>
+    </div>
+    <div>
+
+		<div id="seat" style="float: left; width: 60%;">
+			<!-- 		<span class="seats-block seat null">11</span> -->
+			<!-- 		<span class="seats-block seat full">12</span> -->
+		</div>
+
+		<div style="float: right; width: 40%;">
+			<div id="myscroll" class="myscroll">
+				<ul id="message">
+<!-- 					<li><a href="#">2006年1月John Resig等人创建了jQuery</a></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+                          </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+<div class="send-box-mask">
+</div>
+<script src="../plugs/scroll.js"></script>
+<script src="../plugs/jquery.min.js"></script>
+<script src="../js/MeetingInfo.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8088/CommunityManager/websocket");
+    }
+    else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        alert("WebSocket连接发生错误");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function () {
+//     	alert("WebSocket连接成功");
+    	websocket.send((new Date()).toLocaleString()+"  小五进入了会议");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+//     	alert(event.data);
+    	$('#message').append('<li><a href="#">'+event.data+'</a></li>');
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+//     	alert("WebSocket连接关闭");
+    	websocket.send((new Date()).toLocaleString()+"  小五离开了会议");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        closeWebSocket();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+    	alert(innerHTML);
+    }
+
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息
+    function send() {
+        websocket.send("wahahahahahahahaha");
+    }
+</script>
+
+

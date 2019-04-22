@@ -6581,7 +6581,7 @@ span.seats-block.seat {
     text-align: center;
     display: inline-block;
     font-size: 12px;
-    width: 30px;
+    width: 10%;
     height: 26px;
     line-height: 26px;
     background-position: 0 1px;
@@ -6590,9 +6590,20 @@ span.seats-block.seat {
 span.seats-block.seat.null {
     background: url(../images/nullSeat.png) no-repeat center center;
 }
+span.seats-block.seat.choose {
+    background: url(../images/seat.png) no-repeat center center;
+}
 span.seats-block.seat.full {
     background: url(../images/fullSeat.png) no-repeat center center;
 }
+
+span.seats-block.seat.null.active {
+    background: url(../images/fullSeat.png) no-repeat center center;
+}
+span.seats-block.seat.full.active {
+    background: url(../images/fullSeat.png) no-repeat center center;
+}
+
 .seats-block .row {
     white-space: nowrap;
     margin-bottom: 10px;

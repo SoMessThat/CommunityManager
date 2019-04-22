@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import mess.wkb.cm.code.po.CmAttendancePO;
 import mess.wkb.cm.code.service.CmAttendanceService;
@@ -53,6 +54,10 @@ public class CmAttendanceCtrl {
 		if(!ObjectUtil.isEmpty(id)) condition.setId(Long.valueOf(id));
 		String name = request.getParameter("cmAttendance_name");
 		if(!ObjectUtil.isEmpty(name)) condition.setName(String.valueOf(name));
+		String content = request.getParameter("cmAttendance_content");
+		if(!ObjectUtil.isEmpty(content)) condition.setContent(String.valueOf(content));
+        String place = request.getParameter("cmAttendance_place");
+		if(!ObjectUtil.isEmpty(place)) condition.setPlace(String.valueOf(place));
 		String creatTime = request.getParameter("cmAttendance_creatTime");
 		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(dateFormater.parse(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
@@ -124,6 +129,10 @@ public class CmAttendanceCtrl {
 		if(!ObjectUtil.isEmpty(id)) condition.setId(Long.valueOf(id));
 		String name = request.getParameter("cmAttendance_name");
 		if(!ObjectUtil.isEmpty(name)) condition.setName(String.valueOf(name));
+		String content = request.getParameter("cmAttendance_content");
+		if(!ObjectUtil.isEmpty(content)) condition.setContent(String.valueOf(content));
+        String place = request.getParameter("cmAttendance_place");
+		if(!ObjectUtil.isEmpty(place)) condition.setPlace(String.valueOf(place));
 		String creatTime = request.getParameter("cmAttendance_creatTime");
 		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(dateFormater.parse(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
@@ -162,6 +171,10 @@ public class CmAttendanceCtrl {
 		CmAttendance po=new CmAttendance();
 		String name = request.getParameter("cmAttendance_name");
 		if(!ObjectUtil.isEmpty(name)) po.setName(String.valueOf(name));
+		String content = request.getParameter("cmAttendance_content");
+		if(!ObjectUtil.isEmpty(content)) po.setContent(String.valueOf(content));
+        String place = request.getParameter("cmAttendance_place");
+		if(!ObjectUtil.isEmpty(place)) po.setPlace(String.valueOf(place));
 		String creatTime = request.getParameter("cmAttendance_creatTime");
 		if(!ObjectUtil.isEmpty(creatTime)) po.setCreatTime(dateFormater.parse(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
@@ -183,6 +196,13 @@ public class CmAttendanceCtrl {
 		}
 		response.setResult(Response.RESULT_SUCCESS);
 		return response;
+	}
+	
+	@RequestMapping(value="/openMeetingInfo")
+	public ModelAndView openMeetingInfo(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("MeetingInfo");
+		return mv;
 	}
 }
 

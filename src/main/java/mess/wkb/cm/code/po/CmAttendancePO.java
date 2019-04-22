@@ -1,14 +1,11 @@
 package mess.wkb.cm.code.po; 
 
-
-import mess.wkb.cm.tool.util.ObjectUtil;
-
-import java.util.Date;
-
 import org.apache.log4j.Logger;
+
 import mess.wkb.cm.tool.annotation.Column;
 import mess.wkb.cm.tool.annotation.PrimaryKey;
 import mess.wkb.cm.tool.annotation.Table;
+import mess.wkb.cm.tool.util.ObjectUtil;
 
 
 
@@ -24,7 +21,7 @@ public class CmAttendancePO implements java.io.Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6737105954109584371L;
+	private static final long serialVersionUID = 7089741095671191313L;
 
 
 	Logger log = Logger.getLogger(this.getClass());
@@ -43,22 +40,34 @@ public class CmAttendancePO implements java.io.Serializable {
 	private String name;
 	
 	/**
+	 * -- content
+	 */
+    @Column("CONTENT")    
+	private String content;
+	
+	/**
+	 * -- place
+	 */
+    @Column("PLACE")    
+	private String place;
+	
+	/**
 	 * -- creat_time
 	 */
     @Column("CREAT_TIME")    
-	private Date creatTime;
+	private java.util.Date creatTime;
 	
 	/**
 	 * -- begin_time
 	 */
     @Column("BEGIN_TIME")    
-	private Date beginTime;
+	private java.util.Date beginTime;
 	
 	/**
 	 * -- end_time
 	 */
     @Column("END_TIME")    
-	private Date endTime;
+	private java.util.Date endTime;
 	
 	/**
 	 * -- department_id
@@ -97,29 +106,47 @@ public class CmAttendancePO implements java.io.Serializable {
 	}
     
 
-    public Date getCreatTime() {
+    public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+    
+
+    public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+    
+
+    public java.util.Date getCreatTime() {
 		return creatTime;
 	}
 
-	public void setCreatTime(Date creatTime) {
+	public void setCreatTime(java.util.Date creatTime) {
 		this.creatTime = creatTime;
 	}
     
 
-    public Date getBeginTime() {
+    public java.util.Date getBeginTime() {
 		return beginTime;
 	}
 
-	public void setBeginTime(Date beginTime) {
+	public void setBeginTime(java.util.Date beginTime) {
 		this.beginTime = beginTime;
 	}
     
 
-    public Date getEndTime() {
+    public java.util.Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(java.util.Date endTime) {
 		this.endTime = endTime;
 	}
     
@@ -157,6 +184,8 @@ public class CmAttendancePO implements java.io.Serializable {
 		 StringBuffer sb = new StringBuffer();
          if(!ObjectUtil.isEmpty(this.getId()))sb.append("id="+this.id+ " | ");
          if(!ObjectUtil.isEmpty(this.getName()))sb.append("name="+this.name+ " | ");
+         if(!ObjectUtil.isEmpty(this.getContent()))sb.append("content="+this.content+ " | ");
+         if(!ObjectUtil.isEmpty(this.getPlace()))sb.append("place="+this.place+ " | ");
          if(!ObjectUtil.isEmpty(this.getCreatTime()))sb.append("creatTime="+this.creatTime+ " | ");
          if(!ObjectUtil.isEmpty(this.getBeginTime()))sb.append("beginTime="+this.beginTime+ " | ");
          if(!ObjectUtil.isEmpty(this.getEndTime()))sb.append("endTime="+this.endTime+ " | ");

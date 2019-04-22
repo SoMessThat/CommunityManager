@@ -1,14 +1,6 @@
 $(function(){
-	$('#myscroll').myScroll({
-		speed: 40, //数值越大，速度越慢
-		rowHeight: 26 //li的高度
-	});
-	for (var row = 0; row < 5; row++) {
-		for (var col = 0; col < 10; col++) {
-			$("#seat").append('<span class="seats-block seat null">'+(row*10+col)+'</span>');
-		}
-		$("#seat").append('<br/>');
-	}
+	
+	//会议列表
 	var intiContent = function () {	
 		$.ajax({
 			url:'../CmAttendance/queryPageCmAttendance.do',
@@ -69,7 +61,7 @@ $(function(){
 										'</div>'+
 										'</div>'+
 										'<div class="summary">'+
-										'摘要：通过对《扁舟过三峡》等书的考证,可知<em>19</em><em>世纪</em>'+data.data[i].content+''+
+										'摘要：<em>19</em><em>世纪</em>'+data.data[i].content+''+
 										'</div>'+
 										'<div class="Keyword">'+
 										'<a><span>开始时间：</span><span>'+data.data[i].beginTime+'</span></a>'+
@@ -92,7 +84,7 @@ $(function(){
 										'<div class="result_new_operaRight result_new_operaItem">'+
 										'<ul class="clear">'+
 										'<li><a href="javascript:void(0)" class="result_new_opera_otherWay">'+
-										'<input class="layui-btn layui-btn-small layui-btn-normal see" id="modify" value="查看">'+
+										'<input class="layui-btn layui-btn-small layui-btn-normal see" id="see" onclick="see('+data.data[i].id+')" value="查看">'+
 										'</a></li>'+
 										'<li></li>'+
 										'</ul>'+
@@ -101,8 +93,28 @@ $(function(){
 								'</div>');
 							}
 						},
-					}) 
+					})
 				}
+			});
+		});
+	}
+	see= function (id){
+		layui.use(['layer'], function(){
+			var layer = layui.layer,
+			$ = layui.$;
+			layer.open({
+				type: 2,
+				skin: 'layui-layer-rim',
+				title: '查看会议',
+				shadeClose: false,
+				shade: false,
+				closeBtn:1,
+				area:['100%','100%'],
+				resize:false,
+				content: '../CmAttendance/openMeetingInfo.do',
+				success : function(layero, index){
+				},
+
 			});
 		});
 	}
