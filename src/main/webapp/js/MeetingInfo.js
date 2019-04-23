@@ -62,7 +62,7 @@ $(function(){
 			return false;
 		}
 		if ($("#seat").find(".choose").length>0) {
-			$luck.find(".choose").removeClass("choose");
+			$("#seat").find(".choose").removeClass("choose");
 		}
 		$(e).addClass("choose");
 	}
@@ -70,7 +70,7 @@ $(function(){
 	//签到
 	attendance = function () {	
 		if ($("#seat").find(".choose").length==1) {
-			var id = $luck.find(".choose").attr('id');
+			var id = $("#seat").find(".choose").attr('id');
 			alert(id);
 			//签到
 			$("#"+id).removeClass("choose");
@@ -85,7 +85,7 @@ $(function(){
 			$("#seatRow_"+row).append('<span id=seat_'+(row*10+col)+' class="seats-block seat null" onclick="chooseSeat(this)"></span>');
 		}
 	}
-	$("#seat").append('<p style=" margin-left: 5%; ">已签到人数：<span id="count" style=" padding:10px;font-size: 31px;">6</span>人<span>'+
+	$("#seat").append('<p style=" margin-left: 5%; ">已签到人数：<span id="count" style=" padding:10px;font-size: 31px;">0</span>人<span>'+
 			'<input class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" onclick="attendance()" value="签到"></span></p>');
 	
 	//抽取幸运观众
@@ -98,9 +98,9 @@ $(function(){
 			cycle:100,	//转动基本次数：即至少需要转动多少次再进入抽奖环节
 			prize:-1,	//中奖位置
 			init:function(id){
-				if ($("#"+id).find(".seats-block").length>0) {
+				if ($("#"+id).find(".full").length>0) {
 					$luck = $("#"+id);
-					$units = $luck.find(".seats-block");
+					$units = $luck.find(".full");
 					this.obj = $luck;
 					this.count = $units.length;
 					$luck.find("#seat_"+this.index).addClass("active");

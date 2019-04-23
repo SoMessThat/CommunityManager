@@ -1,0 +1,12 @@
+.xm-select-parent .xm-form-select dl .xm-select-tips{
+	width: 95%;
+}
+.xm-select-parent .xm-form-select dl dd{
+    cursor: pointer;
+    height: 36px;
+    width: 100px;
+    float: left;
+}
+.xm-select-parent .xm-select-title{
+	background: #fff;
+}

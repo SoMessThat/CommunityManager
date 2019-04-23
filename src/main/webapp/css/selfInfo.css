@@ -4168,7 +4168,7 @@ span.adressP {
 }
 
 .ListItem .ItemHead span:first-child {
-    min-width: 365px;
+    min-width: 33.3%;
 }
 
 .ListItem .ItemHead span.degree {
