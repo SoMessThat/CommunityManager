@@ -70,13 +70,13 @@ public class CmSchemeService extends BaseService<CmSchemePO>{
 	 * @param id
 	 * @throws MysqlDBException
 	 */
-	public CmSchemePO getCmSchemeById(String id) throws MysqlDBException{
+	public CmScheme getCmSchemeById(String id) throws MysqlDBException{
 		if(ObjectUtil.isEmpty(id)){
 			MysqlDBException e = new MysqlDBException("通过主键 查询对象，主键 id 不能为空");
 			log.error("通过主键 查询对象，主键 id 不能为空",e);
 			throw e;
 		}
-		return this.get(id);
+		return schemeDAO.selectByPrimaryKey(Long.parseLong(id));
 	}
 	
 	/**

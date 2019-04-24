@@ -112,8 +112,8 @@ public class CmSchemeCtrl {
 	
 	@RequestMapping(value="/findCmSchemeById")
 	@ResponseBody
-	public Response<CmSchemePO> findCmSchemeById(String id){
-		Response<CmSchemePO> response =ResponseFactory.getDefaultSuccessResponse();
+	public Response<CmScheme> findCmSchemeById(String id){
+		Response<CmScheme> response =ResponseFactory.getDefaultSuccessResponse();
 		if (ObjectUtil.isEmpty(id)) {
 			response.setError("id不能为空");
 			return response;
