@@ -7,7 +7,7 @@ $(function(){
 			data: {
 				cmAttendance_departmentId:1,
 				page:1,
-				limit:5,
+				limit:7,
 			},
 			dataType:'json',
 			error:function (res) {
@@ -23,12 +23,12 @@ $(function(){
 		layui.use('laypage', function(){
 			var laypage = layui.laypage;
 			laypage.render({
-				elem: 'page',
+				elem: 'Paypage',
 				count: data.count,
-				limit:5,
+				limit: 7,
 				jump: function(obj, first){
 					$.ajax({
-						url:'../CmPaymentRecord/queryPageCmPaymentRecord.do',
+						url:'../CmPayment/queryPageCmPayment.do',
 						type:'post',
 						data: {
 							cmAttendance_departmentId:1,
@@ -39,7 +39,7 @@ $(function(){
 						success : function(data){
 							$("#PayDemo").empty();
 							for (var i = 0; i < obj.limit; i++) {
-								$("#PayDemo").append('<div class="ResultCont">'+
+								$("#PayDemo").append('<div class="ResultCont" style="margin-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">'+
 										'<div class="title">'+
 										'<a href="" target="_blank"><em>'+data.data[i].userName+':</em>'+data.data[i].name+'</a>'+
 										'<a href="javascript:void(0)">'+
@@ -48,46 +48,13 @@ $(function(){
 										'</a>'+
 										'</div>'+
 										'<div class="ResultMoreinfo">'+
-										'<div class="author">'+
-										'<span class="resultResouceType">'+data.data[i].departmentId+'</span>'+
-										'<a href="" target="_blank">'+data.data[i].userName+'</a>'+
-										'</div>'+
-										'<div class="Label periodical_label">'+
-										'<span class="blockspan">'+data.data[i].place+'</span>'+
-										'</div>'+
 										'<div class="Volume">'+
-										'<a href="" target="_blank">'+data.data[i].creatTime+'</a>'+
+										'<a href="" target="_blank">创建时间：'+data.data[i].creatTime+'</a>'+
 										'</div>'+
 										'</div>'+
-										'<div class="summary">'+
-										'摘要：<em>19</em><em>世纪</em>'+data.data[i].content+''+
-										'</div>'+
-										'<div class="Keyword">'+
-										'<a><span>开始时间：</span><span>'+data.data[i].beginTime+'</span></a>'+
-										'<a><span>结束时间：</span><span>'+data.data[i].endTime+'</span></a>'+
-										'</div>'+
-										'<div class="result_new_operaWrap clear">'+
-										'<div class="result_new_operaLeft result_new_operaItem">'+
-										'<ul class="clear result_new_listOperaWrap">'+
-										'<div class="Mbtn">'+
-										'<li><a href="javascript:void(0)" class="result_opera_subscribe " id="col1" onclick="collectionOne("zglsdllc201901004","perio",this.id)">'+
-										'<i style="background: url(../images/hand.png) no-repeat center center; background-size: cover;"></i> <span>收到</span>'+
-										'</a></li>'+
-										'</div>'+
-										'</ul>'+
-										'</div>'+
-										'<div class="result_new_operaCenter result_new_operaItem">'+
-										'<ul class="clear">'+
-										'</ul>'+
-										'</div>'+
-										'<div class="result_new_operaRight result_new_operaItem">'+
-										'<ul class="clear">'+
-										'<li><a href="javascript:void(0)" class="result_new_opera_otherWay">'+
-										'<input class="layui-btn layui-btn-small layui-btn-normal see" id="see" onclick="see('+data.data[i].id+')" value="查看">'+
-										'</a></li>'+
-										'<li></li>'+
-										'</ul>'+
-										'</div>'+
+										'<div class="result_new_operaRight result_new_operaItem" style="float: right;">'+
+										'<input class="layui-btn layui-btn-small layui-btn-normal see" style=" margin-top: -48px; " id="see" onclick="see('+data.data[i].id+
+										')" value="查看">'+
 										'</div>'+
 								'</div>');
 							}
