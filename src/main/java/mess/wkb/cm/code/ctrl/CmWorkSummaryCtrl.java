@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import mess.wkb.cm.code.po.CmWorkSummaryPO;
 import mess.wkb.cm.code.service.CmWorkSummaryService;
@@ -89,14 +90,14 @@ public class CmWorkSummaryCtrl {
 	
 	@RequestMapping(value="/findCmWorkSummaryById")
 	@ResponseBody
-	public Response<CmWorkSummaryPO> findCmWorkSummaryById(String id){
-		Response<CmWorkSummaryPO> response =ResponseFactory.getDefaultSuccessResponse();
+	public Response<CmWorkSummary> findCmWorkSummaryById(String id){
+		Response<CmWorkSummary> response =ResponseFactory.getDefaultSuccessResponse();
 		if (ObjectUtil.isEmpty(id)) {
 			response.setError("id不能为空");
 			return response;
 		}
 		try {
-			response.setData(cmWorkSummaryService.getCmWorkSummaryById(id));
+			response.setData(cmWorkSummaryService.getCmWorkSummaryById(Long.parseLong(id)));
 		} catch (MysqlDBException e) {
 			response.setError("网络连接失败，请检查网络");
 			return response;
@@ -241,5 +242,12 @@ public class CmWorkSummaryCtrl {
 		}
 		response.setResult(Response.RESULT_SUCCESS);
 		return response;
+	}
+	
+	@RequestMapping(value="/openSummaryInfo")
+	public ModelAndView openSchemeInfo(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("SummaryInfo");
+		return mv;
 	}
 }

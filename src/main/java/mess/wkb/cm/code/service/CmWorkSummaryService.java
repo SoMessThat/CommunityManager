@@ -70,13 +70,13 @@ public class CmWorkSummaryService extends BaseService<CmWorkSummaryPO>{
 	 * @param id
 	 * @throws MysqlDBException
 	 */
-	public CmWorkSummaryPO getCmWorkSummaryById(String id) throws MysqlDBException{
+	public CmWorkSummary getCmWorkSummaryById(Long id) throws MysqlDBException{
 		if(ObjectUtil.isEmpty(id)){
 			MysqlDBException e = new MysqlDBException("通过主键 查询对象，主键 id 不能为空");
 			log.error("通过主键 查询对象，主键 id 不能为空",e);
 			throw e;
 		}
-		return this.get(id);
+		return workSummaryDAO.selectByPrimaryKey(id);
 	}
 	
 	/**

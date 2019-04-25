@@ -1,11 +1,12 @@
 package mess.wkb.cm.code.po; 
 
 
-import mess.wkb.cm.tool.util.ObjectUtil;
 import org.apache.log4j.Logger;
+
 import mess.wkb.cm.tool.annotation.Column;
-import mess.wkb.cm.tool.annotation.PrimaryKey;
+import mess.wkb.cm.tool.annotation.Id;
 import mess.wkb.cm.tool.annotation.Table;
+import mess.wkb.cm.tool.util.ObjectUtil;
 
 
 
@@ -30,7 +31,7 @@ public class CmWorkSummaryPO implements java.io.Serializable {
 	/**
 	 * -- id
 	 */
-    @PrimaryKey("ID")
+    @Id("ID")
 	private Long id;
 	
 	/**

@@ -1,0 +1,134 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #FAFAFA;
+	font: 12pt "Tahoma";
+}
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.page {
+	width: 21cm;
+	min-height: 29.7cm;
+	padding: 2cm;
+	margin: 1cm auto;
+	border: 1px #D3D3D3 solid;
+	border-radius: 5px;
+	background: white;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+@page {
+	size: A4;
+	margin: 0;
+}
+
+@media print {
+	.page {
+		margin: 0;
+		border: initial;
+		border-radius: initial;
+		width: initial;
+		min-height: initial;
+		box-shadow: initial;
+		background: initial;
+		page-break-after: always;
+	}
+}
+
+.content {
+	margin-left: 52.6500pt;
+	mso-para-margin-left: -2.5900gd;
+	text-indent: -79.8500pt;
+	mso-char-indent-count: -2.2100;
+}
+
+.title {
+	text-align: center;
+	mso-spacerun: 'yes';
+	font-family: 仿宋_GB2312;
+	mso-hansi-font-family: 宋体;
+	mso-bidi-font-family: 'Times New Roman';
+	font-weight: bold;
+	font-size: 36.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.BigFont {
+	text-align: center;
+	mso-spacerun: 'yes';
+	font-family: 仿宋_GB2312;
+	mso-hansi-font-family: 宋体;
+	mso-bidi-font-family: 'Times New Roman';
+	font-weight: bold;
+	font-size: 80.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.FirstTitle {
+	text-indent: 0em;
+	mso-spacerun: 'yes';
+	font-family: 宋体;
+	mso-ascii-font-family: 'Times New Roman';
+	mso-hansi-font-family: 'Times New Roman';
+	mso-bidi-font-family: 'Times New Roman';
+	font-weight: bold;
+	font-size: 14.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.Text {
+	mso-spacerun: 'yes';
+	font-family: 宋体;
+	font-size: 14.0000pt;
+	mso-font-kerning: 1.0000pt;
+	mso-ascii-font-family: 'Times New Roman';
+	mso-hansi-font-family: 'Times New Roman';
+}
+
+.Tail {
+	mso-spacerun: 'yes';
+	font-family: 仿宋_GB2312;
+	mso-hansi-font-family: 楷体;
+	mso-bidi-font-family: 'Courier New';
+	/* 	font-weight: bold; */
+	font-size: 14.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.Name {
+	mso-spacerun: 'yes';
+	font-family: 宋体;
+	mso-ascii-font-family: 'Times New Roman';
+	mso-hansi-font-family: 'Times New Roman';
+	mso-bidi-font-family: 'Times New Roman';
+	font-weight: bold;
+	font-size: 18.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.Attention {
+	mso-spacerun: 'yes';
+	font-family: 宋体;
+	mso-bidi-font-family: Arial;
+	font-size: 14.0000pt;
+	mso-font-kerning: 1.0000pt;
+}
+
+.DepartmentName {
+	mso-char-indent-count: 5.9700;
+}
+
+.Sign {
+	word-break: break-all;
+	text-align: right;
+	width: 60%;
+}
+
+.FirstLine {
+	text-indent: 2em;
+	mso-char-indent-count: 2.0000;
+}
