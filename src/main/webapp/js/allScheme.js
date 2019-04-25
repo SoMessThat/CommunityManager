@@ -65,23 +65,26 @@ $(function(){
 		});
 	}
 	see= function (id){
-		layui.use(['layer'], function(){
-			var layer = layui.layer,
-			$ = layui.$;
-			layer.open({
-				type: 2,
-				skin: 'layui-layer-rim',
-				title: '查看策划',
-				shadeClose: false,
-				shade: false,
-				closeBtn:1,
-				area:['100%','100%'],
-				resize:false,
-				content: '../CmScheme/openSchemeInfo.do',
-				success : function(layero, index){
-				},
-
-			});
-		});
+		<!--
+		window.open ('../CmScheme/openSchemeInfo.do');
+		-->
+//		layui.use(['layer'], function(){
+//			var layer = layui.layer,
+//			$ = layui.$;
+//			layer.open({
+//				type: 2,
+//				skin: 'layui-layer-rim',
+//				title: '查看策划',
+//				shadeClose: false,
+//				shade: false,
+//				closeBtn:1,
+//				area:['100%','100%'],
+//				resize:false,
+//				content: '../CmScheme/openSchemeInfo.do',
+//				success : function(layero, index){
+//				},
+//
+//			});
+//		});
 	}
 });
