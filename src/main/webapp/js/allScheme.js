@@ -65,9 +65,7 @@ $(function(){
 		});
 	}
 	see= function (id){
-		<!--
 		window.open ('../CmScheme/openSchemeInfo.do');
-		-->
 //		layui.use(['layer'], function(){
 //			var layer = layui.layer,
 //			$ = layui.$;
