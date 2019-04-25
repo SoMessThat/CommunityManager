@@ -2,7 +2,7 @@ $(function(){
 
 	var intiContent = function () {	
 		$.ajax({
-			url:'../CmPayment/queryPageCmPayment.do',
+			url:'../CmScheme/queryPageCmScheme.do',
 			type:'post',
 			data: {
 				cmAttendance_departmentId:1,
@@ -23,12 +23,12 @@ $(function(){
 		layui.use('laypage', function(){
 			var laypage = layui.laypage;
 			laypage.render({
-				elem: 'Paypage',
+				elem: 'Schemepage',
 				count: data.count,
 				limit: 7,
 				jump: function(obj, first){
 					$.ajax({
-						url:'../CmPayment/queryPageCmPayment.do',
+						url:'../CmScheme/queryPageCmScheme.do',
 						type:'post',
 						data: {
 							cmAttendance_departmentId:1,
@@ -37,13 +37,13 @@ $(function(){
 						},
 						dataType:'json',
 						success : function(data){
-							$("#PayDemo").empty();
+							$("#SchemeDemo").empty();
 							for (var i = 0; i < obj.limit; i++) {
-								$("#PayDemo").append('<div class="ResultCont" style="margin-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">'+
+								$("#SchemeDemo").append('<div class="ResultCont" style="margin-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">'+
 										'<div class="title">'+
-										'<a href="" target="_blank"><em>'+data.data[i].userName+':</em>'+data.data[i].name+'</a>'+
+										'<a href="" target="_blank"><em></em>'+data.data[i].name+'</a>'+
 										'<a href="javascript:void(0)">'+
-										'<i class="icon icon_Miner" id="icon1" onclick="showBox(this.id,"zglsdllc201901004","perio")" title="'+data.data[i].state+
+										'<i class="icon icon_Miner" id="icon1" title="'+data.data[i].state+
 										'" style="margin-left: 0px; background: url(../images/Ended.png) no-repeat center center; background-size: cover;"></i>'+
 										'</a>'+
 										'</div>'+
@@ -61,6 +61,26 @@ $(function(){
 						},
 					})
 				}
+			});
+		});
+	}
+	see= function (id){
+		layui.use(['layer'], function(){
+			var layer = layui.layer,
+			$ = layui.$;
+			layer.open({
+				type: 2,
+				skin: 'layui-layer-rim',
+				title: '查看策划',
+				shadeClose: false,
+				shade: false,
+				closeBtn:1,
+				area:['100%','100%'],
+				resize:false,
+				content: '../CmScheme/openSchemeInfo.do',
+				success : function(layero, index){
+				},
+
 			});
 		});
 	}
