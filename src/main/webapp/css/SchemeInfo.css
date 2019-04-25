@@ -69,6 +69,7 @@ body {
 }
 
 .FirstTitle {
+	text-indent: 0em;
 	mso-spacerun: 'yes';
 	font-family: 宋体;
 	mso-ascii-font-family: 'Times New Roman';
@@ -82,9 +83,10 @@ body {
 .Text {
 	mso-spacerun: 'yes';
 	font-family: 宋体;
-	mso-bidi-font-family: 'Times New Roman';
 	font-size: 14.0000pt;
 	mso-font-kerning: 1.0000pt;
+	mso-ascii-font-family: 'Times New Roman';
+	mso-hansi-font-family: 'Times New Roman';
 }
 
 .Tail {
@@ -92,7 +94,7 @@ body {
 	font-family: 仿宋_GB2312;
 	mso-hansi-font-family: 楷体;
 	mso-bidi-font-family: 'Courier New';
-	font-weight: bold;
+	/* 	font-weight: bold; */
 	font-size: 14.0000pt;
 	mso-font-kerning: 1.0000pt;
 }
@@ -105,16 +107,6 @@ body {
 	mso-bidi-font-family: 'Times New Roman';
 	font-weight: bold;
 	font-size: 18.0000pt;
-	mso-font-kerning: 1.0000pt;
-}
-
-.Theme {
-	mso-spacerun: 'yes';
-	font-family: 宋体;
-	mso-ascii-font-family: 'Times New Roman';
-	mso-hansi-font-family: 'Times New Roman';
-	mso-bidi-font-family: 'Times New Roman';
-	font-size: 14.0000pt;
 	mso-font-kerning: 1.0000pt;
 }
 
@@ -133,9 +125,10 @@ body {
 .Sign {
 	word-break: break-all;
 	text-align: right;
-	width: 50%;
+	width: 60%;
 }
 
-.FirstLine{
-	text-indent: 2em; mso-char-indent-count: 2.0000;
+.FirstLine {
+	text-indent: 2em;
+	mso-char-indent-count: 2.0000;
 }
