@@ -1,0 +1,42 @@
+.six {
+	width: 100%;
+/* 	background: #0cc; */
+	height: 50px;
+	float: left;
+/* 	border:1px solid #000; */
+/* 	    margin: -1px; */
+}
+
+.three {
+	width: 50%;
+/* 	background: #c0c; */
+	height: 50px;
+	float: left;
+/* 	border:1px solid #000; */
+/*     margin: -1px; */
+}
+
+.two {
+	width: 33.3%;
+/* 	background: #cc0; */
+	height: 50px;
+	float: left;
+/* 	border:1px solid #000; */
+/* 	    margin: -1px; */
+}
+
+.addCol{
+	clear:both;
+	width: 9%;
+}
+
+.name {
+    width: 30%;
+    margin: 0px;
+    padding: 0px;
+}
+.value {
+    width: 68%;
+    margin: 0px;
+    padding: 0px;
+}
