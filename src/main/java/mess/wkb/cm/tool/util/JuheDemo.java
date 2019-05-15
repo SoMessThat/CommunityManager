@@ -21,13 +21,13 @@ public class JuheDemo {
 	public static final int DEF_READ_TIMEOUT = 30000;
 	public static String userAgent =  "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
-	public static void mobileQuery(){
+	public static void mobileQuery(String phoneNum, String code){
 		String result =null;
 		String url ="http://v.juhe.cn/sms/send";//请求接口地址
 		Map params = new HashMap();//请求参数
-			params.put("mobile","13075851351");//接受短信的用户手机号码
+			params.put("mobile",phoneNum);//接受短信的用户手机号码
                         params.put("tpl_id","153625");//您申请的短信模板ID，根据实际情况修改
-                        params.put("tpl_value","#code#=214215");//您设置的模板变量，根据实际情况修改
+                        params.put("tpl_value","#code#="+code);//您设置的模板变量，根据实际情况修改
 			params.put("key","bd94ddae5088533ffa770fd05fa1626d");//应用APPKEY(应用详细页查询)
 		try {
 			result = net(url, params, "GET");
@@ -43,7 +43,7 @@ public class JuheDemo {
 	}
 
 	public static void main(String[] args) {
-		mobileQuery();
+		mobileQuery("13075851351","592012");
 	}
 	
 	/**

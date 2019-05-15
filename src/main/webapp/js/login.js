@@ -124,29 +124,6 @@ $(function(){
 			$('.num2-err').text('手机号不合法，请重新输入');
 			return false;
 		}
-		$.ajax({
-            url: '/checkPhone',
-            type: 'post',
-            dataType: 'json',
-            async: false,
-            data: {phone:phone,type:"login"},
-            success:function(data){
-                if (data.code == '0') {
-                    $('.num2-err').addClass('hide');
-                    // console.log('aa');
-                    // return true;
-                } else {
-                    $('.num2-err').removeClass('hide').text(data.msg);
-                    // console.log('bb');
-					status = false;
-					// return false;
-                }
-            },
-            error:function(){
-            	status = false;
-                // return false;
-            }
-        });
 		return status;
 	}
 
@@ -186,34 +163,13 @@ $(function(){
 		} else {
 			$(".log-btn").click(function(){
 				// var type = 'phone';
+				$('#num2').val($.trim($('#num2').val()));
+				$('#veri-code').val($.trim($('#veri-code').val()));
 				var phone = $.trim($('#num2').val());
 				var pcode = $.trim($('#veri-code').val());
 				if (checkPhone(phone) && checkPass(pcode)) {
-					alert(2);
-					$.ajax({
-			            url: '/plogin',
-			            type: 'post',
-			            dataType: 'json',
-			            async: true,
-			            data: {phone:phone,code:pcode},
-			            success:function(data){
-			                if (data.code == '0') {
-			                	// globalTip({'msg':'登录成功!','setTime':3,'jump':true,'URL':'http://www.ui.cn'});
-			                	globalTip(data.msg);
-			                } else if(data.code == '1') {
-			                	$(".log-btn").off('click').addClass("off");
-			                    $('.num2-err').removeClass('hide').text(data.msg);
-			                    return false;
-			                } else if(data.code == '2') {
-			                	$(".log-btn").off('click').addClass("off");
-			                    $('.error').removeClass('hide').text(data.msg);
-			                    return false;
-			                }
-			            },
-			            error:function(){
-			                
-			            }
-			        });
+					alert(phone+pcode);
+					$('#Form2').submit();
 				} else {
 					$(".log-btn").off('click').addClass("off");
 					// $('.tel-warn').removeClass('hide').text('登录失败');
@@ -234,8 +190,9 @@ $(function(){
 	$(".form-data").delegate(".send","click",function () {
 		var phone = $.trim($('#num2').val());
 		if (checkPhone(phone)) {
+			//发送短信
 				$.ajax({
-		            url: '/getcode',
+		            url: '../sendMessage.do',
 		            type: 'post',
 		            dataType: 'json',
 		            async: true,
@@ -264,7 +221,7 @@ $(function(){
 	                clearInterval(timer);
 	                oSend.text("重新发送验证码");
 				    oSend.show();
-	                oEm.text("120");
+	                oEm.text("60");
 	                oTime.addClass("hide");
 	            }
 	        },1000);

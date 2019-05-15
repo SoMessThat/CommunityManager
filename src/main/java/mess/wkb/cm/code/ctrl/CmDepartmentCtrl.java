@@ -85,6 +85,24 @@ public class CmDepartmentCtrl {
 		
 	}
 	
+	@RequestMapping(value="/findCmDepartmentById")
+	@ResponseBody
+	public Response<CmDepartmentPO> findCmDepartmentById(String id){
+		Response<CmDepartmentPO> response =ResponseFactory.getDefaultSuccessResponse();
+		if (ObjectUtil.isEmpty(id)) {
+			response.setError("id不能为空");
+			return response;
+		}
+		try {
+			response.setData(cmDepartmentService.getCmDepartmentById(id));
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
 	@RequestMapping(value="/delCmDepartment")
 	@ResponseBody
 	public Response<CmDepartmentPO> delCmDepartment(String id){
@@ -97,24 +115,6 @@ public class CmDepartmentCtrl {
 		
 		try {
 			cmDepartmentService.deleteCmDepartmentById(id);
-		} catch (MysqlDBException e) {
-			response.setError("网络连接失败，请检查网络");
-			return response;
-		}
-		response.setResult(Response.RESULT_SUCCESS);
-		return response;
-	}
-	
-	@RequestMapping(value="/findCmDepartmentById")
-	@ResponseBody
-	public Response<CmDepartmentPO> findCmDepartmentById(String id){
-		Response<CmDepartmentPO> response =ResponseFactory.getDefaultSuccessResponse();
-		if (ObjectUtil.isEmpty(id)) {
-			response.setError("id不能为空");
-			return response;
-		}
-		try {
-			response.setData(cmDepartmentService.getCmDepartmentById(id));
 		} catch (MysqlDBException e) {
 			response.setError("网络连接失败，请检查网络");
 			return response;
