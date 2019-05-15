@@ -1,4 +1,6 @@
 package mess.wkb.cm.code.ctrl;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import mess.wkb.cm.code.po.CmDepartmentPO;
 import mess.wkb.cm.code.po.CmUserPO;
 import mess.wkb.cm.code.service.CmUserService;
-import mess.wkb.cm.tool.util.JuheDemo;
+import mess.wkb.cm.code.vo.CmUser;
 import mess.wkb.cm.tool.util.ObjectUtil;
+import mess.wkb.cm.tool.util.UUIDUtil;
 import mess.wkb.cm.tool.util.ajax.Response;
 import mess.wkb.cm.tool.util.ajax.ResponseFactory;
 import mess.wkb.cm.tool.util.creatdata.ChineseName;
@@ -96,11 +99,28 @@ public class BackCtrl{
 		Response<List<CmDepartmentPO>> response = ResponseFactory.getDefaultSuccessResponse();
 		String phoneNum = request.getParameter("phone");
 		if (ObjectUtil.isEmpty(phoneNum)) {
+			response.setResult(Response.RESULT_ERROR);
 			response.setError("手机号不能为空");
+		}
+		String type = request.getParameter("type");
+		if (!ObjectUtil.isEmpty(type)&&"register".equalsIgnoreCase(type)) {
+			CmUserPO user= new CmUserPO();
+			user.setTel(phoneNum);
+			List<CmUserPO> userPO = new ArrayList<CmUserPO>();
+			try {
+				userPO = TuserService.queryListCmUserByParam(user);
+			} catch (MysqlDBException e) {
+				e.printStackTrace();
+			}
+			if (userPO.size()>0) {
+				response.setError("该手机号已被注册");
+				response.setResult(Response.RESULT_ERROR);
+				return response;
+			}
 		}
 		String code = ChineseName.get6Code();
 		System.out.println("验证码："+code);
-		JuheDemo.mobileQuery(phoneNum,code);
+//		JuheDemo.mobileQuery(phoneNum,code);
 		HttpSession session = request.getSession();
 		session.setAttribute("code", code);
 		session.setAttribute("phone", phoneNum);
@@ -162,5 +182,89 @@ public class BackCtrl{
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	
+	/**
+	 * 注册验证	
+	 * @createTime: 2018年10月10日 上午9:29:48
+	 * @author: wu.kaibin
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/registerVri")
+	@ResponseBody
+	public Response<CmDepartmentPO> registerVri(HttpServletRequest request){
+		Response<CmDepartmentPO> response = ResponseFactory.getDefaultSuccessResponse();
+		String phone = request.getParameter("phone");
+		String code = request.getParameter("code");
+		if (ObjectUtil.isEmpty(phone)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		if (ObjectUtil.isEmpty(code)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		CmUserPO user = new CmUserPO();
+		user.setTel(phone);
+		HttpSession session = request.getSession();
+		String codeSession = "1111";//(String) session.getAttribute("code");
+		String phoneNum = (String) session.getAttribute("phone");
+		if (!code.equalsIgnoreCase(codeSession)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		if (!phone.equalsIgnoreCase(phoneNum)) {
+			response.setError("手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		List<CmUserPO> userPO = new ArrayList<CmUserPO>();
+		try {
+			userPO = TuserService.queryListCmUserByParam(user);
+		} catch (MysqlDBException e) {
+			e.printStackTrace();
+		}
+		if (userPO.size()>0) {
+			response.setError("该手机号已被注册");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		return response;
+	}
+	
+	/**
+	 * 验证	
+	 * @createTime: 2018年10月10日 上午9:29:48
+	 * @author: wu.kaibin
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/register")
+	@ResponseBody
+	public Response<String> register(HttpServletRequest request){
+		Response<String> response = ResponseFactory.getDefaultSuccessResponse();
+		String pass = request.getParameter("pass");
+		HttpSession session = request.getSession();
+		String phoneNum = (String) session.getAttribute("phone");
+		CmUser user = new CmUser();
+		user.setTel(phoneNum);
+		user.setPassword(pass);
+		user.setAccount(phoneNum);
+		SimpleDateFormat  df = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		user.setCreatTime(df.format(System.currentTimeMillis()));
+		user.setId(UUIDUtil.getUUID());
+		user.setState("正常");
+		user.setRole(0l);
+		TuserService.insertSelective(user);
+		session.setAttribute("user", user);
+		String basePath = request.getScheme() + "://"
+				+ request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath();
+		response.setData(basePath+"/html/index.html#/userInfo");
+		return response;
 	}
 }

@@ -153,9 +153,9 @@ $(function(){
 						}
 						ldata.code = code;
 					}
-						$('#userinp').val($.trim($('#num').val()));
-						$('#password').val(hex_md5($.trim($('#pass').val())));
-						$('#Form').submit();
+					$('#userinp').val($.trim($('#num').val()));
+					$('#password').val(hex_md5($.trim($('#pass').val())));
+					$('#Form').submit();
 				} else {
 					return false;
 				}

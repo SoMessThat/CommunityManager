@@ -202,6 +202,10 @@ public class CmUserService extends BaseService<CmUserPO>{
 		String[] columnProperty = {"id","account","username","password","avatar","tel","creatTime","state","departmentId","studentId","role"};
 		return this.findExpByQuery(q, columnProperty);
 	}
+
+	public void insertSelective(CmUser user) {
+		userDAO.insertSelective(user);
+	}
 	
 	
 	

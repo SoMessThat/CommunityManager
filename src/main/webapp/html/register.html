@@ -15,7 +15,7 @@
             <div class="form-data pos">
                 <a href=""><img src="../images/logo.png" class="head-logo"></a>
                 <!--<p class="tel-warn hide"><i class="icon-warn"></i></p>-->
-                <form>
+                <form id="form1">
                     <p class="p-input pos">
                         <label for="tel">手机号</label>
                         <input type="number" id="tel" autocomplete="off">
@@ -25,16 +25,18 @@
                         <label for="veri-code">输入验证码</label>
                         <input type="number" id="veri-code">
                         <a href="javascript:;" class="send">发送验证码</a>
-                        <span class="time hide"><em>120</em>s</span>
+                        <span class="time hide"><em>60</em>s</span>
                         <span class="error hide"><em></em><i class="icon-warn" style="margin-left: 5px"></i></span>
                     </p>
-                    <p class="p-input pos hide" id="pwd">
+                </form>
+                <form id="form2" class="hide">
+                    <p class="p-input pos" id="pwd">
                         <label for="passport">输入密码</label>
                         <input type="password" style="display: none"/>
                         <input type="password" id="passport">
                         <span class="tel-warn pwd-err hide"><em></em><i class="icon-warn" style="margin-left: 5px"></i></span>
                     </p>
-                    <p class="p-input pos hide" id="confirmpwd">
+                    <p class="p-input pos" id="confirmpwd">
                         <label for="passport2">确认密码</label>
                         <input type="password" style="position:absolute;top:-998px"/>
                         <input type="password" id="passport2">
@@ -43,11 +45,12 @@
                 </form>
                 <div class="reg_checkboxline pos">
                     <span class="z"><i class="icon-ok-sign boxcol" nullmsg="请同意!"></i></span>
-                    <input type="hidden" name="agree" value="1">
+                    <input type="hidden" id="agree" name="agree" value="1">
                     <div class="Validform_checktip"></div>
                     <p>我已阅读并接受 <a href="#" target="_brack">《XXXX协议说明》</a></p>
                 </div>
-                <button class="lang-btn">注册</button>
+                <button id="lang-btn1" class="lang-btn">注册1</button>
+                <button id="lang-btn2" class="lang-btn hide">注册2</button>
                 <div class="bottom-info">已有账号，<a href="./login.html">马上登录</a></div>
                 <div class="third-party">
                     <a href="#" class="log-qq icon-qq-round"></a>
@@ -60,6 +63,7 @@
     </div>
 <script src="../plugs/jquery.min.js"></script>
 <script src="../js/agree.js"></script>
-<script src="../js/login.js"></script>
+<script src="../js/register.js"></script>
+<script src="../plugs/MD5/md5.js"></script>
 </body>
 </html>
