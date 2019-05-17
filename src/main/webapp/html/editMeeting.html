@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="../plugs/layui/css/layui.css"/>
+<link rel="stylesheet" type="text/css" href="../plugs/jedate/jedate.css"/>
+<link rel="stylesheet" type="text/css" href="../css/addMeeting.css"/>
+<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+<div style="width: 100%; padding-top: 24px;marbackground-color: #ffffff;">
+<form class="layui-form layui-form-pane">
+<input type="hidden" id="id" name="id" class="layui-input" >
+<div class="layui-form-item">
+	<label class="layui-form-label col10">会议名称</label>
+	<div class="layui-input-inline col52">
+		<input id="name" name="name" class="layui-input">
+	</div>
+<!-- 	<div class="layui-form-mid">会议名称不能为空</div> -->
+</div>
+<div class="layui-form-item">
+	<label class="layui-form-label col10">选择日期</label>
+	<div class="layui-input-inline col20 twoCol">
+		<input type="text" class="layui-input" id="beginTime" readonly />
+	</div>
+	<label class="layui-form-label col10">时间段</label>
+	<div class="layui-input-inline col20">
+<input class="layui-input" id="endTime" type="text" placeholder="hh:mm:ss" readonly />
+	</div>
+</div>
+<div class="layui-form-item">
+	<label class="layui-form-label col10">地点</label>
+	<div class="layui-input-inline col20">
+		<input id="place" name="place" class="layui-input">
+	</div>
+<!-- 	<div class="layui-form-mid">会议地点不能为空</div> -->
+</div>
+<div class="layui-form-item layui-form-text col62">
+    <label class="layui-form-label">会议概要</label>
+    <div class="layui-input-block">
+      <textarea id="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+</div>
+</form>
+</div>
+<script src="../plugs/jquery.min.js"></script>
+<script src="../plugs/jedate/jedate.js"></script>
+<script src="../js/addMeeting.js"></script>

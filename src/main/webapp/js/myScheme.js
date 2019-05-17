@@ -1,3 +1,13 @@
+function checkState(state){
+	if (state == '驳回') {
+		return 'close';
+	}
+	if (state == '审核通过') {
+		return 'open';
+	}
+	return 'come';
+}
+
 $(function(){
 
 	var intiContent = function () {	
@@ -39,22 +49,49 @@ $(function(){
 						success : function(data){
 							$("#SchemeDemo").empty();
 							for (var i = 0; i < obj.limit; i++) {
+								item = data.data[i];
 								$("#SchemeDemo").append('<div class="ResultCont" style="margin-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">'+
 										'<div class="title">'+
-										'<a href="" target="_blank"><em></em>'+data.data[i].name+'</a>'+
-										'<a href="javascript:void(0)">'+
-										'<i class="icon icon_Miner" id="icon1" title="'+data.data[i].state+
-										'" style="margin-left: 0px; background: url(../images/Ended.png) no-repeat center center; background-size: cover;"></i>'+
-										'</a>'+
+										'<a target="_blank"><em>'+item.department+':</em>'+item.name+'</a>'+
+										'<b class="layui-btn mini '+checkState(item.state)+
+												'">'+item.state+'</b>'+
 										'</div>'+
 										'<div class="ResultMoreinfo">'+
+										'<div class="author">'+
+										'<span class="resultResouceType">'+item.creatPerson+'</span>'+
+										'<a>活动主题：'+item.theme+'</a>'+
+										'</div>'+
 										'<div class="Volume">'+
-										'<a href="" target="_blank">创建时间：'+data.data[i].creatTime+'</a>'+
+										'<a>&nbsp;&nbsp;&nbsp;活动形式'+item.form+'</a>'+
 										'</div>'+
 										'</div>'+
-										'<div class="result_new_operaRight result_new_operaItem" style="float: right;">'+
-										'<input class="layui-btn layui-btn-small layui-btn-normal see" style=" margin-top: -48px; " id="see" onclick="see('+data.data[i].id+
-										')" value="查看">'+
+										'<div class="summary">'+
+										'<em>摘要</em>：'+item.content+''+
+										'</div>'+
+										'<div class="Keyword">'+
+										'<a><span><em>创建时间</em>：</span><span>'+item.creatTime+'</span></a>'+
+										'<a><span><em>开始时间</em>：</span><span>'+item.beginTime+'</span></a>'+
+										'</div>'+
+										'<div class="Keyword">'+
+										'<a><span><em>活动对象</em>：</span><span>'+item.place+'</span></a>'+
+										'<a><span><em>活动地点</em>：</span><span>'+item.person+'</span></a>'+
+										'</div>'+
+										'<div class="result_new_operaWrap clear">'+
+										'<div class="result_new_operaLeft result_new_operaItem">'+
+										'<ul class="clear result_new_listOperaWrap">'+
+										'</ul>'+
+										'</div>'+
+										'<div class="result_new_operaCenter result_new_operaItem">'+
+										'<ul class="clear">'+
+										'</ul>'+
+										'</div>'+
+										'<div class="result_new_operaRight result_new_operaItem">'+
+										'<ul class="clear">'+
+										'<li><b class="layui-btn mini look" onclick="see('+item.id+')">&nbsp;查看&nbsp;</b>'+
+										'</li>'+
+										'<li></li>'+
+										'</ul>'+
+										'</div>'+
 										'</div>'+
 								'</div>');
 							}

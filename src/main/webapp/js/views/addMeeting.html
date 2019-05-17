@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../plugs/jedate/jedate.css"/>
 <link rel="stylesheet" type="text/css" href="../css/addMeeting.css"/>
 <link rel="stylesheet" type="text/css" href="../css/base.css"/>
-<form id="cmAttendanceform" lay-filter="cmAttendanceform" class="layui-form layui-form-pane" style="margin-top: 5px">
+<form class="layui-form layui-form-pane" style="margin-top: 40px">
 <input type="hidden" id="id" name="id" class="layui-input" >
 <div class="layui-form-item">
 	<label class="layui-form-label col10">会议名称</label>
@@ -30,12 +30,12 @@
 <div class="layui-form-item layui-form-text col62">
     <label class="layui-form-label">会议概要</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+      <textarea id="content" placeholder="请输入内容" class="layui-textarea"></textarea>
     </div>
 </div>
 <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+      <button id="add" class="layui-btn" lay-filter="demo1">立即提交</button>
       <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     </div>
   </div>

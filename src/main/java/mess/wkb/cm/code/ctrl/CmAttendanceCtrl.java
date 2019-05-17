@@ -2,9 +2,12 @@ package mess.wkb.cm.code.ctrl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,12 +46,17 @@ public class CmAttendanceCtrl {
 
 		CmAttendancePO condition=new CmAttendancePO();
 		
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		condition.setUserId("1");
+		
 		//不越界，查找属于自己部门的会议
-		String departmentId = request.getParameter("cmAttendance_departmentId");
+		String departmentId = "1";
 		if(ObjectUtil.isEmpty(departmentId)){
 			response.setError("未查询到您的部门身份，请重新登录");
 			return response;
 		}
+		
 		condition.setDepartmentId(departmentId);
 		String id = request.getParameter("cmAttendance_id");
 		if(!ObjectUtil.isEmpty(id)) condition.setId(Long.valueOf(id));
@@ -58,16 +66,15 @@ public class CmAttendanceCtrl {
 		if(!ObjectUtil.isEmpty(content)) condition.setContent(String.valueOf(content));
         String place = request.getParameter("cmAttendance_place");
 		if(!ObjectUtil.isEmpty(place)) condition.setPlace(String.valueOf(place));
-		String creatTime = request.getParameter("cmAttendance_creatTime");
-		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(dateFormater.parse(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
-		if(!ObjectUtil.isEmpty(beginTime)) condition.setBeginTime(dateFormater.parse(beginTime));
+		if(!ObjectUtil.isEmpty(beginTime)) condition.setBeginTime(String.valueOf(beginTime));
 		String endTime = request.getParameter("cmAttendance_endTime");
-		if(!ObjectUtil.isEmpty(endTime)) condition.setEndTime(dateFormater.parse(endTime));
+		if(!ObjectUtil.isEmpty(endTime)) condition.setEndTime(String.valueOf(endTime));
 		String userName = request.getParameter("cmAttendance_userName");
 		if(!ObjectUtil.isEmpty(userName)) condition.setUserName(String.valueOf(userName));
 		String state = request.getParameter("cmAttendance_state");
 		if(!ObjectUtil.isEmpty(state)) condition.setState(String.valueOf(state));
+		
 
 		try {
 			cmAttendances = cmAttendanceService.queryPageCmAttendance(page,limit,condition);
@@ -134,13 +141,11 @@ public class CmAttendanceCtrl {
         String place = request.getParameter("cmAttendance_place");
 		if(!ObjectUtil.isEmpty(place)) condition.setPlace(String.valueOf(place));
 		String creatTime = request.getParameter("cmAttendance_creatTime");
-		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(dateFormater.parse(creatTime));
+		if(!ObjectUtil.isEmpty(creatTime)) condition.setCreatTime(String.valueOf(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
-		if(!ObjectUtil.isEmpty(beginTime)) condition.setBeginTime(dateFormater.parse(beginTime));
+		if(!ObjectUtil.isEmpty(beginTime)) condition.setBeginTime(String.valueOf(beginTime));
 		String endTime = request.getParameter("cmAttendance_endTime");
-		if(!ObjectUtil.isEmpty(endTime)) condition.setEndTime(dateFormater.parse(endTime));
-		String departmentId = request.getParameter("cmAttendance_departmentId");
-		if(!ObjectUtil.isEmpty(departmentId)) condition.setDepartmentId(String.valueOf(departmentId));
+		if(!ObjectUtil.isEmpty(endTime)) condition.setEndTime(String.valueOf(endTime));
 		String userName = request.getParameter("cmAttendance_userName");
 		if(!ObjectUtil.isEmpty(userName)) condition.setUserName(String.valueOf(userName));
 		String state = request.getParameter("cmAttendance_state");
@@ -175,17 +180,15 @@ public class CmAttendanceCtrl {
 		if(!ObjectUtil.isEmpty(content)) po.setContent(String.valueOf(content));
         String place = request.getParameter("cmAttendance_place");
 		if(!ObjectUtil.isEmpty(place)) po.setPlace(String.valueOf(place));
-		String creatTime = request.getParameter("cmAttendance_creatTime");
-		if(!ObjectUtil.isEmpty(creatTime)) po.setCreatTime(dateFormater.parse(creatTime));
 		String beginTime = request.getParameter("cmAttendance_beginTime");
 		if(!ObjectUtil.isEmpty(beginTime)) po.setBeginTime(dateFormater.parse(beginTime));
 		String endTime = request.getParameter("cmAttendance_endTime");
 		if(!ObjectUtil.isEmpty(endTime)) po.setEndTime(dateFormater.parse(endTime));
-		String departmentId = request.getParameter("cmAttendance_departmentId");
-		if(!ObjectUtil.isEmpty(departmentId)) po.setDepartmentId(String.valueOf(departmentId));
-		String userName = request.getParameter("cmAttendance_userName");
-		if(!ObjectUtil.isEmpty(userName)) po.setUserName(String.valueOf(userName));
-		String state = request.getParameter("cmAttendance_state");
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		po.setDepartmentId("1");
+		po.setUserName("刘亦菲");
+		String state = "未开始";
 		if(!ObjectUtil.isEmpty(state)) po.setState(String.valueOf(state));
 
 		try {
@@ -201,8 +204,65 @@ public class CmAttendanceCtrl {
 	@RequestMapping(value="/openMeetingInfo")
 	public ModelAndView openMeetingInfo(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		String id = request.getParameter("id");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("id",id);
+		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		map.put("userId","1");
+		try {
+			CmAttendancePO meet = cmAttendanceService.getCmAttendanceById(map);
+			session.setAttribute("meeting", meet);
+		} catch (MysqlDBException e) {
+			e.printStackTrace();
+		}
 		mv.setViewName("MeetingInfo");
 		return mv;
+	}
+	
+	@RequestMapping(value="/getMeetingInfo")
+	@ResponseBody
+	public Response<CmAttendancePO> getMeetingInfo(HttpServletRequest request) {
+		Response<CmAttendancePO> response =ResponseFactory.getDefaultSuccessResponse();
+		HttpSession session = request.getSession();
+		CmAttendancePO meeting = (CmAttendancePO) session.getAttribute("meeting");
+		response.setData(meeting);
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	@RequestMapping(value="/getMeetingCount")
+	@ResponseBody
+	public Response<Map<String, String>> getMeetingCount(HttpServletRequest request) {
+		Response<Map<String, String>> response =ResponseFactory.getDefaultSuccessResponse();
+		HttpSession session = request.getSession();
+		CmAttendancePO meeting = (CmAttendancePO) session.getAttribute("meeting");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("id",meeting.getId()+"");
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		map.put("userId","1");
+		Map<String, String> count = cmAttendanceService.getCount(map);
+		response.setData(count);
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	@RequestMapping(value="/getMeetingSeat")
+	@ResponseBody
+	public Response<List<Map<String, String>>> getMeetingSeat(HttpServletRequest request) {
+		Response<List<Map<String, String>>> response =ResponseFactory.getDefaultSuccessResponse();
+		HttpSession session = request.getSession();
+		CmAttendancePO meeting = (CmAttendancePO) session.getAttribute("meeting");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("id",meeting.getId()+"");
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		map.put("userId","1");
+		List<Map<String, String>> count = cmAttendanceService.getSeat(map);
+		response.setData(count);
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
 	}
 }
 

@@ -2813,6 +2813,7 @@ ul.lh-list li:hover {
 
 div.resume_key {
     margin-left: 10px
+    cursor:default;
 }
 
 .OtherList div.resume_key,
@@ -3781,6 +3782,7 @@ div.resume_key {
 
 .ItemDetails .resume_key {
     min-height: 20px;
+    cursor:default;
 }
 
 .ItemRight .ItemDetails .resume_key,
@@ -3789,6 +3791,7 @@ div.resume_key {
     letter-spacing: -0.13px;
     font-size: 12px;
     color: #757575;
+    cursor:default;
 }
 
 div.resume_key {
@@ -3957,6 +3960,7 @@ input.layui-btn.layui-btn-normal.layui-btn-small.modifyBtn {
     font-size:14px;
     color:#7f7f7f;
     letter-spacing:-0.15px;
+    cursor:default;
     border: 1px solid transparent;
 }
 .ResumesBasicTitle .adressH .adressP{
@@ -3971,6 +3975,7 @@ input.layui-btn.layui-btn-normal.layui-btn-small.modifyBtn {
     font-size: 14px;
     color: #7f7f7f;
     letter-spacing: -0.15px;
+    cursor:default;
     border: 1px solid transparent;
 }
 span.adressP {
@@ -3978,6 +3983,7 @@ span.adressP {
     min-width: 20px;
     padding: 3px;
     font-size: 14px;
+    cursor:default;
     color: #7f7f7f;
     letter-spacing: -0.15px;
     border: 1px solid transparent;
@@ -4487,4 +4493,15 @@ span.adressP {
 .rh11 .ResumesBasic-box {
     padding-bottom: 40px;
     padding-top: 50px;
+}
+
+input.modify{
+    border-radius: 6px;
+    border: 1px solid #49ccdd;
+}
+.show{
+	cursor:default;
+}
+.hide{
+	display: none;
 }

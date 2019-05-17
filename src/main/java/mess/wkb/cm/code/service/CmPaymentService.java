@@ -1,15 +1,17 @@
 package mess.wkb.cm.code.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.bean.Query;
 import mess.wkb.cm.tool.web.MysqlDBException;
 import mess.wkb.cm.tool.util.ObjectUtil;
-
+import mess.wkb.cm.code.dao.CmPaymentDAO;
 import mess.wkb.cm.code.po.CmPaymentPO;
 
 
@@ -17,6 +19,9 @@ import mess.wkb.cm.code.po.CmPaymentPO;
 public class CmPaymentService extends BaseService<CmPaymentPO>{
 	
 	Logger log = Logger.getLogger(this.getClass());
+	
+	@Autowired
+	CmPaymentDAO cmPaymentDAO;
 	
 	/**
 	 * 新增对象
@@ -175,6 +180,10 @@ public class CmPaymentService extends BaseService<CmPaymentPO>{
         if(!ObjectUtil.isEmpty(obj.getState()))q.addEq("state", obj.getState()); 
 		String[] columnProperty = {"id","name","creatTime","departmentId","userName","state"};
 		return this.findExpByQuery(q, columnProperty);
+	}
+
+	public List<Map<String, String>> getEmplayee(String departmentId) {
+		return cmPaymentDAO.getEmplayee(departmentId);
 	}
 	
 	

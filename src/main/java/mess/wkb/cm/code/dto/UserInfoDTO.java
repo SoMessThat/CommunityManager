@@ -1,5 +1,8 @@
 package mess.wkb.cm.code.dto;
 
+import java.util.List;
+
+import mess.wkb.cm.code.po.CmAwardPO;
 import mess.wkb.cm.code.vo.CmDepartment;
 import mess.wkb.cm.code.vo.CmStudent;
 
@@ -53,6 +56,29 @@ public class UserInfoDTO {
 	 *   学生信息
 	 */
 	private CmStudent student;
+	
+	/**
+	 *   状态
+	 */
+	private CmStudent state;
+	
+	public CmStudent getState() {
+		return state;
+	}
+
+	public void setState(CmStudent state) {
+		this.state = state;
+	}
+
+	private List<CmAwardPO> award;
+
+	public List<CmAwardPO> getAward() {
+		return award;
+	}
+
+	public void setAward(List<CmAwardPO> award) {
+		this.award = award;
+	}
 
 	public String getId() {
 		return id;

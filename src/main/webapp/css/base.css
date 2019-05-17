@@ -89,3 +89,29 @@
         text-decoration: none;
     background: #fff;
 }
+b.layui-btn.mini {
+    margin-left: 10px;
+    color: #fff;
+    height: 20px;
+    background-color: #1890ff;
+    margin-top: -4px;
+    line-height: 20px;
+    padding: 0 5px;
+    font-size: 12px;
+    border: 0;
+}
+b.layui-btn.mini.close{
+    background-color: #FF5722;
+}
+b.layui-btn.mini.open{
+    background-color: #1890ff;
+}
+b.layui-btn.mini.come{
+    background-color: #c7c2c2;
+}
+b.layui-btn.mini.look{
+    height: 2em;
+    padding: 4px;
+    line-height: 1.5em;
+    background-color: #49ccdd;
+}

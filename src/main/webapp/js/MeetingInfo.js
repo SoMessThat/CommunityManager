@@ -1,4 +1,65 @@
 $(function(){
+	//座位初始化
+
+	$.ajax({
+        url: '../CmAttendance/getMeetingInfo.do',
+        type: 'post',
+        dataType: 'json',
+        async: true,
+        success:function(data){
+        	$('#meetingName').html(data.data.name);
+        	$('#departmentName').html('<span class="normal"><em>部门</em>：'+data.data.department.name+'<span>');
+        	$('#beginTime').html('<span class="normal"><em>结束时间：</em>'+data.data.beginTime+'<span>');
+        	$('#endTime').html('<span class="normal"><em>结束时间：</em>'+data.data.endTime+'<span>');
+        	$('#content').html('<span class="normal"><em>摘要：</em>'+data.data.content+'<span>');
+        },
+        error:function(res){
+//        	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+        }
+    });
+	
+	$.ajax({
+        url: '../CmAttendance/getMeetingSeat.do',
+        type: 'post',
+        dataType: 'json',
+        async: true,
+        success:function(data){
+        	for (var i = 0; i < data.data.length; i++) {
+				var array_element = data.data[i];
+				$('#'+array_element.seat).addClass("full");
+				$('#'+array_element.seat).attr("data-avatar",array_element.avatar);
+				$('#'+array_element.seat).attr("data-username",array_element.username);
+			}
+        	
+        },
+        error:function(res){
+//        	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+        }
+    });
+	for (var row = 0; row < 7; row++) {
+		$("#seat").append('<p id="seatRow_'+row+'0'+'"></p>');
+		for (var col = 0; col < 10; col++) {
+			$("#seatRow_"+row+'0').append('<span id="seat_'+(row+''+col)+'" class="seats-block seat null" onclick="chooseSeat(this)"></span>');
+		}
+	}
+	
+		$.ajax({
+	        url: '../CmAttendance/getMeetingCount.do',
+	        type: 'post',
+	        dataType: 'json',
+	        async: true,
+	        success:function(data){
+	        	var str ='<p style=" margin-left: 5%; ">已签到人数：<span id="count" style=" padding:10px;font-size: 31px;">'+data.data.num+'</span>人<span>';
+	        	if (data.data.state > 0) {
+	        		$("#seat").append(str+'<input id="attendBtn" class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" value="已签到"></span></p>');
+				}else {
+					$("#seat").append(str+'<input id="attendBtn" class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" onclick="attendance(this)" value="签到"></span></p>');
+				}
+	        },
+	        error:function(res){
+//	        	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+	        }
+	    });
 	var websocket = null;
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
@@ -26,6 +87,7 @@ $(function(){
     	if (event.data.indexOf("attendance") >= 0 ) {
     		var str = event.data.split("|");
     		$('#'+str[1]).addClass("full");
+    		
     		$('#count').html((parseInt($('#count').html())+1));
 		}
     }
@@ -68,25 +130,35 @@ $(function(){
 	}
 
 	//签到
-	attendance = function () {	
+	attendance = function (e) {	
 		if ($("#seat").find(".choose").length==1) {
 			var id = $("#seat").find(".choose").attr('id');
-			alert(id);
 			//签到
 			$("#"+id).removeClass("choose");
+			$.ajax({
+		        url: '../CmAttendanceRecord/attend.do',
+		        type: 'post',
+		        dataType: 'json',
+		        data:{
+		        	seat:id
+		        },
+		        async: true,
+		        success:function(data){
+//		        	var str ='<p style=" margin-left: 5%; ">已签到人数：<span id="count" style=" padding:10px;font-size: 31px;">'+data.data.num+'</span>人<span>';
+//		        	if (data.data.state > 0) {
+//		        		$("#seat").append(str+'<input id="attendBtn" class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" value="已签到"></span></p>');
+//					}else {
+//						$("#seat").append(str+'<input id="attendBtn" class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" onclick="attendance(this)" value="签到"></span></p>');
+//					}
+		        },
+		        error:function(res){
+//		        	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+		        }
+		    });
 			websocket.send('attendance|'+id);
+			$(e).removeAttr('onclick');
 		}
 	}
-	
-	//座位初始化
-	for (var row = 0; row < 7; row++) {
-		$("#seat").append('<p id=seatRow_'+row+'></p>');
-		for (var col = 0; col < 10; col++) {
-			$("#seatRow_"+row).append('<span id=seat_'+(row*10+col)+' class="seats-block seat null" onclick="chooseSeat(this)"></span>');
-		}
-	}
-	$("#seat").append('<p style=" margin-left: 5%; ">已签到人数：<span id="count" style=" padding:10px;font-size: 31px;">0</span>人<span>'+
-			'<input class="layui-btn layui-btn-small layui-btn-normal see" style="float: right;margin-right: 5%;" onclick="attendance()" value="签到"></span></p>');
 	
 	//抽取幸运观众
 	var luck={

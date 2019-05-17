@@ -66,6 +66,23 @@ $(function(){
 		layer = layui.layer,
 		form = layui.form;
 		form.on('submit(get)', function(data){
+			$.ajax({
+	            url: '../sendMessage.do',
+	            type: 'post',
+	            dataType: 'json',
+	            async: true,
+	            data: {phone:data.field.cellphone,type:"modifyPass"},
+	            success:function(data){
+	                if (data.result == 'error') {
+	                	layer.msg(data.errors[0], {icon: 5,time: 1000});
+	                } else {
+	                	layer.msg("已发送,请注意查收", {icon: 1,time: 1000});
+	                }
+	            },
+	            error:function(){
+	            	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+	            }
+	        });
 			var t = setInterval(function() { 
 				if (wait == 0) { 
 					$("#get").attr('disabled',false); 
@@ -84,27 +101,54 @@ $(function(){
 		form.on('submit(go)', function(data){
 			console.log(data.field.cellphone);
 			console.log(data.field.vercode);
-			if (data.field.vercode != "1") {
-				layer.msg("验证码错误",{ time: 1000 });
-				return false;
-			}
-			else {
-				form.rend
-				$("#Form1").attr('style','display: none;'); 
-				$("#Form2").removeAttr('style'); 
-				return false;
-			}
+			
+			$.ajax({
+	            url: '../modifyPassVri.do',
+	            type: 'post',
+	            dataType: 'json',
+	            async: true,
+	            data: {phone:data.field.cellphone,code:data.field.vercode},
+	            success:function(data){
+	                if (data.result == 'error') {
+	                	layer.msg("系统错误", {icon: 5,time: 1000});
+	                } else {
+	                	$("#Form1").attr('style','display: none;'); 
+	    				$("#Form2").removeAttr('style'); 
+	                }
+	            },
+	            error:function(){
+	                
+	            }
+	        });
 			return false;
 		});
 		$("#LAY-user-forget-resetpass").click(function(){
 			var pass =hex_md5($("#LAY-user-login-password").val());
 			var repass =hex_md5($("#LAY-user-login-repass").val());
 			if (pass == repass) {
+				$.ajax({
+		            url: '../modifyPass.do',
+		            type: 'post',
+		            dataType: 'json',
+		            async: true,
+		            data: {"password":pass},
+		            success:function(data){
+		                if (data.result == 'error') {
+		                	layer.msg("系统错误", {icon: 5,time: 1000});
+		                } else {
+		                	$("#Form1").attr('style','display: none;'); 
+		    				$("#Form2").removeAttr('style'); 
+		                }
+		            },
+		            error:function(){
+		            	layer.msg("网络连接失败，请检查网络", {icon: 5,time: 1000});
+		            }
+		        });
 				layer.msg("修改成功",{ time: 1000 });
 				$("#Form2").attr('style','display: none;'); 
 				$("#Form1").removeAttr('style');
 			} else {
-				layer.msg("两次密码必须相同",{ time: 1000 });
+				layer.msg("两次密码必须相同", {icon: 5,time: 1000});
 			}
 		});
 	});

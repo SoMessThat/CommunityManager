@@ -1,10 +1,13 @@
 package mess.wkb.cm.code.po; 
 
+import javax.persistence.Id;
+
 import org.apache.log4j.Logger;
 
+import mess.wkb.cm.code.vo.CmDepartment;
 import mess.wkb.cm.tool.annotation.Column;
-import mess.wkb.cm.tool.annotation.PrimaryKey;
 import mess.wkb.cm.tool.annotation.Table;
+import mess.wkb.cm.tool.annotation.UnColumn;
 import mess.wkb.cm.tool.util.ObjectUtil;
 
 
@@ -30,7 +33,7 @@ public class CmAttendancePO implements java.io.Serializable {
 	/**
 	 * -- id
 	 */
-    @PrimaryKey("ID")
+	@Id
 	private Long id;
 	
 	/**
@@ -55,19 +58,19 @@ public class CmAttendancePO implements java.io.Serializable {
 	 * -- creat_time
 	 */
     @Column("CREAT_TIME")    
-	private java.util.Date creatTime;
+	private String creatTime;
 	
 	/**
 	 * -- begin_time
 	 */
     @Column("BEGIN_TIME")    
-	private java.util.Date beginTime;
+	private String beginTime;
 	
 	/**
 	 * -- end_time
 	 */
     @Column("END_TIME")    
-	private java.util.Date endTime;
+	private String endTime;
 	
 	/**
 	 * -- department_id
@@ -87,8 +90,40 @@ public class CmAttendancePO implements java.io.Serializable {
     @Column("STATE")    
 	private String state;
     
+    @UnColumn
+    private CmDepartment department;
+    
+    @UnColumn
+    private CmAttendanceRecordPO record; 
 
-    public Long getId() {
+    @UnColumn
+    private String userId;
+    
+    public CmAttendanceRecordPO getRecord() {
+		return record;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setRecord(CmAttendanceRecordPO record) {
+		this.record = record;
+	}
+
+	public CmDepartment getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(CmDepartment department) {
+		this.department = department;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -124,29 +159,29 @@ public class CmAttendancePO implements java.io.Serializable {
 	}
     
 
-    public java.util.Date getCreatTime() {
+    public String getCreatTime() {
 		return creatTime;
 	}
 
-	public void setCreatTime(java.util.Date creatTime) {
-		this.creatTime = creatTime;
+	public void setCreatTime(String string) {
+		this.creatTime = string;
 	}
     
 
-    public java.util.Date getBeginTime() {
+    public String getBeginTime() {
 		return beginTime;
 	}
 
-	public void setBeginTime(java.util.Date beginTime) {
+	public void setBeginTime(String beginTime) {
 		this.beginTime = beginTime;
 	}
     
 
-    public java.util.Date getEndTime() {
+    public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(java.util.Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
     

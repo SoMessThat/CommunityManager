@@ -95,7 +95,7 @@ public class BackCtrl{
 	 */
 	@RequestMapping(value ="/sendMessage")
 	@ResponseBody
-	public Response<List<CmDepartmentPO>> LoginBySMS(HttpServletRequest request){
+	public Response<List<CmDepartmentPO>> sendMessage(HttpServletRequest request){
 		Response<List<CmDepartmentPO>> response = ResponseFactory.getDefaultSuccessResponse();
 		String phoneNum = request.getParameter("phone");
 		if (ObjectUtil.isEmpty(phoneNum)) {
@@ -114,6 +114,25 @@ public class BackCtrl{
 			}
 			if (userPO.size()>0) {
 				response.setError("该手机号已被注册");
+				response.setResult(Response.RESULT_ERROR);
+				return response;
+			}
+		}
+		if (!ObjectUtil.isEmpty(type)&&"modifyPass".equalsIgnoreCase(type)) {
+			CmUserPO user= new CmUserPO();
+			user.setTel(phoneNum);
+//			HttpSession session = request.getSession();
+//			CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+//			user.setId(userSession.getId());
+			user.setId("1");
+			List<CmUserPO> userPO = new ArrayList<CmUserPO>();
+			try {
+				userPO = TuserService.queryListCmUserByParam(user);
+			} catch (MysqlDBException e) {
+				e.printStackTrace();
+			}
+			if (userPO.size()<=0) {
+				response.setError("手机号错误");
 				response.setResult(Response.RESULT_ERROR);
 				return response;
 			}
@@ -210,7 +229,7 @@ public class BackCtrl{
 		CmUserPO user = new CmUserPO();
 		user.setTel(phone);
 		HttpSession session = request.getSession();
-		String codeSession = "1111";//(String) session.getAttribute("code");
+		String codeSession = (String) session.getAttribute("code");
 		String phoneNum = (String) session.getAttribute("phone");
 		if (!code.equalsIgnoreCase(codeSession)) {
 			response.setError( "手机不能为空");
@@ -265,6 +284,80 @@ public class BackCtrl{
 				+ request.getServerName() + ":" + request.getServerPort()
 				+ request.getContextPath();
 		response.setData(basePath+"/html/index.html#/userInfo");
+		return response;
+	}
+	
+	/**
+	 * 忘记密码验证	
+	 * @createTime: 2018年10月10日 上午9:29:48
+	 * @author: wu.kaibin
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/modifyPassVri")
+	@ResponseBody
+	public Response<CmDepartmentPO> modifyPassVri(HttpServletRequest request){
+		Response<CmDepartmentPO> response = ResponseFactory.getDefaultSuccessResponse();
+		String phone = request.getParameter("phone");
+		String code = request.getParameter("code");
+		if (ObjectUtil.isEmpty(phone)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		if (ObjectUtil.isEmpty(code)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		CmUserPO user = new CmUserPO();
+		user.setTel(phone);
+		HttpSession session = request.getSession();
+		String codeSession = (String) session.getAttribute("code");
+		String phoneNum = (String) session.getAttribute("phone");
+		if (!code.equalsIgnoreCase(codeSession)) {
+			response.setError( "手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		if (!phone.equalsIgnoreCase(phoneNum)) {
+			response.setError("手机不能为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		return response;
+	}
+	
+	/**
+	 * 修改密码
+	 * @createTime: 2018年10月10日 上午9:29:48
+	 * @author: wu.kaibin
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/modifyPass")
+	@ResponseBody
+	public Response<CmDepartmentPO> modifyPass(HttpServletRequest request){
+		Response<CmDepartmentPO> response = ResponseFactory.getDefaultSuccessResponse();
+		String password = request.getParameter("password");
+		CmUser user= new CmUser();
+		user.setPassword(password);
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+//		user.setId(userSession.getId());
+		user.setId("1");
+		if (ObjectUtil.isEmpty(password)) {
+			response.setError( "密码为空");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
+		try {
+			TuserService.updateCmUser(user);
+		} catch (MysqlDBException e) {
+			response.setError( "网络错误");
+			response.setResult(Response.RESULT_ERROR);
+			return response;
+		}
 		return response;
 	}
 }
