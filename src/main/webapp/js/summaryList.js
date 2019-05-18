@@ -55,6 +55,9 @@ $(function(){
 										'<b class="layui-btn mini '+checkState(data.data[i].state)+
 										'">'+data.data[i].state+'</b>'+
 										'</div>'+
+										'<div class="summary">'+
+										'<em>提交人：</em>：'+data.data[i].userName+''+
+										'</div>'+
 										'<div class="ResultMoreinfo">'+
 										'<div class="Volume">'+
 										'<a href="" target="_blank">创建时间：'+data.data[i].creatTime+'</a>'+

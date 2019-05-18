@@ -731,3 +731,21 @@
 	height: 40px;
 	border-radius: 100%
 }
+
+
+.mydialog{
+	margin-top: 10%;
+    position: absolute;
+    margin-left: 12%;
+    padding-left:6%;
+    z-index:999;
+    text-align:center;
+    padding-top:5%;
+    padding-bottom:5%;
+    background-color: #ccc;
+/*     width: 800px; */
+    background-color: rgba(0,0,0,.6);
+}
+.hide{
+	display: none;
+}

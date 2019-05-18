@@ -8,6 +8,14 @@ function checkState(state){
 	return 'close';
 }
 
+function look(){
+	$('#divv').removeClass('hide');
+}
+
+function closeDialog(){
+	$('#divv').addClass('hide');
+}
+
 $(function(){
 	$('#EmployeeDemo').html("");
 	layui.use('flow', function(){
@@ -26,7 +34,7 @@ $(function(){
 						lis.push('<div class="layadmin-maillist-img layadmin-font-blod">'+item.student.name+'</div>');
 						lis.push('<div class="layadmin-maillist-img layadmin-font-blod">');
 						lis.push('<div class="layui-btn-group" style="margin-top: 12px">');
-						lis.push('<button class="layui-btn layui-btn-primary layui-btn-sm">查看</button>');
+						lis.push('<button class="layui-btn layui-btn-primary layui-btn-sm" onclick="look()">查看</button>');
 						lis.push('<button class="layui-btn layui-btn-primary layui-btn-sm">辞退</button>');
 						lis.push('</div>');
 						lis.push('</div>');
