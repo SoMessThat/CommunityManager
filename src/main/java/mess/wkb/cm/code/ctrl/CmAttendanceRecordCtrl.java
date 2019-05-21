@@ -2,15 +2,21 @@ package mess.wkb.cm.code.ctrl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import mess.wkb.cm.code.po.CmAttendancePO;
 import mess.wkb.cm.code.po.CmAttendanceRecordPO;
 import mess.wkb.cm.code.service.CmAttendanceRecordService;
 import mess.wkb.cm.tool.bean.Paged;
@@ -26,7 +32,7 @@ public class CmAttendanceRecordCtrl {
 
 	@Autowired
 	private CmAttendanceRecordService cmAttendanceRecordService;
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	@RequestMapping(value ="/queryPageCmAttendanceRecord")
 	@ResponseBody
@@ -91,7 +97,7 @@ public class CmAttendanceRecordCtrl {
 			return response;
 		}
 		try {
-			response.setData(cmAttendanceRecordService.getCmAttendanceRecordById(id));
+			response.setData(cmAttendanceRecordService.getCmAttendanceRecordById(Long.parseLong(id)));
 		} catch (MysqlDBException e) {
 			response.setError("网络连接失败，请检查网络");
 			return response;
@@ -160,6 +166,79 @@ public class CmAttendanceRecordCtrl {
 			response.setError("网络连接失败，请检查网络");
 			return response;
 		}
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
+	
+	@RequestMapping(value="/shouDao")
+	@ResponseBody
+	public Response<CmAttendanceRecordPO> shouDao(HttpServletRequest request) {
+		Response<CmAttendanceRecordPO> response =ResponseFactory.getDefaultSuccessResponse();
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		CmAttendanceRecordPO po = new CmAttendanceRecordPO();
+		po.setUserName("1");
+		
+		//不越界，查找属于自己部门的会议
+		String departmentId = "1";
+		po.setDepartmentId(departmentId);
+		String id = request.getParameter("id");
+		po.setAttendanceId(Long.parseLong(id));
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		po.setState(df.format(new Data())+":收到,");
+		
+		try {
+			cmAttendanceRecordService.addCmAttendanceRecord(po);
+		} catch (MysqlDBException e) {
+			response.setError("网络连接失败，请检查网络");
+			return response;
+		}
+		return response;
+	}
+	
+	
+	@RequestMapping(value="/attend")
+	@ResponseBody
+	public Response<String> attend(HttpServletRequest request) {
+		Response<String> response =ResponseFactory.getDefaultSuccessResponse();
+		
+		CmAttendanceRecordPO po=new CmAttendanceRecordPO();
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		HttpSession session = request.getSession();
+		CmAttendancePO meeting = (CmAttendancePO) session.getAttribute("meeting");
+		po.setAttendanceId(meeting.getId());
+        po.setUserName("1");
+        CmAttendanceRecordPO result = null;
+		result = cmAttendanceRecordService.getAttend(po);
+        if (ObjectUtil.isEmpty(result)) {
+        	try {
+        		po.setDepartmentId("1");
+        		po.setState("签到");
+        		cmAttendanceRecordService.addCmAttendanceRecord(po);
+        	} catch (MysqlDBException e) {
+        		response.setError("网络连接失败，请检查网络");
+        		return response;
+        	}
+		}else {
+			po.setState(result.getState()+"签到");
+			po.setId(result.getId());
+			try {
+				cmAttendanceRecordService.updateCmAttendanceRecord(po);
+			} catch (MysqlDBException e) {
+				e.printStackTrace();
+			}
+		}
+		
+        String seat = request.getParameter("seat");
+        Map<String, String> map = new HashMap<String,String>();
+		if(!ObjectUtil.isEmpty(seat)) map.put("seat", seat);
+		map.put("userName", po.getUserName());
+		map.put("attendanceId", po.getUserName());
+		cmAttendanceRecordService.seat(map);
+//		response.setData(userSession.getusername()+"在"+seat+"坐下下了");
+        response.setData("mess"+"在"+seat+"坐下下了");
 		response.setResult(Response.RESULT_SUCCESS);
 		return response;
 	}

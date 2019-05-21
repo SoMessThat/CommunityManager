@@ -1,9 +1,14 @@
 <!-- <link rel="stylesheet" type="text/css" href="../css/goPay.css"/> -->
 <link rel="stylesheet" type="text/css" href="../css/meetingList.css"/>
+<link rel="stylesheet" type="text/css" href="../css/base.css"/>
 <script src='https://libs.baidu.com/jquery/1.10.2/jquery.min.js'></script>
 <script src="../plugs/jquery.min.js"></script>
 
 <div style="width: 80%; padding-top: 24px; margin-left: 10%; background-color: #ffffff">
+<form name=alipayment action=./ha/alipay.trade.page.pay.jsp method=post target="_blank">
+	<input hidden="hidden" id="num"  > <input hidden="hidden" id="content"  >
+	<button hidden="hidden" id="pay" type="submit" style="text-align: center;">付 款</button>
+</form>
 	<div class="ResultBlock" style="clear: both;">
 		<div id="PayDemo" class="ResultList">
 

@@ -221,7 +221,7 @@ public class BaseService<T> implements ApplicationContextAware{
     public Paged<T> findPagedByQuery(Query<T> query){
         List<T> objects = findByQuery(query);
         int count = getDAO().count(query);     
-        return new Paged<T>(objects ,count ,query.getPageNo() ,query.getPageSize());
+        return new Paged<T>(objects ,count ,query.getPageNo() ,query.getPageSize(),true);
     }
 
     @SuppressWarnings("unchecked")

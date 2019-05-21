@@ -1,5 +1,7 @@
 package mess.wkb.cm.code.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import mess.wkb.cm.code.dto.UserInfoDTO;
@@ -38,4 +40,8 @@ public interface CmUserDAO extends BaseDAO<CmUser> {
      * @return
      */
 	UserInfoDTO getCmUserById(String id);
+
+	void updateUserInfo(CmUser obj);
+
+	List<UserInfoDTO> queryEmployee(String departmentId);
 }

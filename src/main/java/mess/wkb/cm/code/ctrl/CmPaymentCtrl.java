@@ -3,6 +3,7 @@ package mess.wkb.cm.code.ctrl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mess.wkb.cm.code.po.CmPaymentPO;
+import mess.wkb.cm.code.service.CmDepartmentService;
 import mess.wkb.cm.code.service.CmPaymentService;
+import mess.wkb.cm.code.vo.CmDepartment;
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.util.ObjectUtil;
 import mess.wkb.cm.tool.util.ajax.Response;
@@ -26,6 +29,9 @@ public class CmPaymentCtrl {
 
 	@Autowired
 	private CmPaymentService cmPaymentService;
+	
+	@Autowired
+	private CmDepartmentService cmDepartmentService;
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -160,4 +166,20 @@ public class CmPaymentCtrl {
 		response.setResult(Response.RESULT_SUCCESS);
 		return response;
 	}
+	
+	@RequestMapping(value="/getEmplayee")
+	@ResponseBody
+	public Response<List<Map<String, String>>> getEmplayee(HttpServletRequest request) throws ParseException{
+		Response<List<Map<String, String>>> response =ResponseFactory.getDefaultSuccessResponse();
+		
+//		HttpSession session = request.getSession();
+//		CmUserPO userSession = (CmUserPO) session.getAttribute("user");
+		String departmentId = "1";
+		List<Map<String, String>>map = cmPaymentService.getEmplayee(departmentId);
+		System.out.println(map.toString());
+		response.setData(map);
+		response.setResult(Response.RESULT_SUCCESS);
+		return response;
+	}
+	
 }

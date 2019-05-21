@@ -148,4 +148,10 @@
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <update id="updateByManage">
+    update cm_work_summary
+    set state = '等待领导审核',
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

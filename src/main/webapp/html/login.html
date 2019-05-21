@@ -19,8 +19,8 @@
                 <p class="message">短信登录</p>
             </div>
 <form id="Form" action="../login.do" method="post">
-<input type="hidden" name="userinp" id="userinp" >
-<input type="hidden" name="password" id="password" >
+			<input type="hidden" name="userinp" id="userinp" >
+			<input type="hidden" name="password" id="password" >
             <div class="form1">
                 <div class="p-input pos">
                     <label for="num">手机号/用户名/UID/邮箱</label>
@@ -38,21 +38,21 @@
                     <input type="text" id="veri">
                     <img src="">
                     <span class="tel-warn img-err hide"><em>账号或密码错误，请重新输入</em><i class="icon-warn"></i></span>
-                    <!-- <a href="javascript:;">换一换</a> -->
                 </p>
             </div>
 </form>
+<form id="Form2" action="../loginBySMS.do" method="post">
             <div class="form2 hide">
                 <p class="p-input pos">
                     <label for="num2">手机号</label>
-                    <input type="number" id="num2">
+                    <input type="number" name="phone" id="num2">
                     <span class="tel-warn num2-err hide"><em>账号或密码错误</em><i class="icon-warn"></i></span>
                 </p>
                 <p class="p-input pos">
                     <label for="veri-code">输入验证码</label>
-                    <input type="number" id="veri-code">
+                    <input type="number" name="code" id="veri-code">
                     <a href="javascript:;" class="send">发送验证码</a>
-                    <span class="time hide"><em>120</em>s</span>
+                    <span class="time hide"><em>60</em>s</span>
                     <span class="tel-warn error hide">验证码错误</span>
                 </p>
             </div>
@@ -60,6 +60,7 @@
                 <a href="./register.html" class="z">账号注册</a>
                 <a href="./getpass.html" class="y">忘记密码</a>
             </div>
+</form>
             <button class="lang-btn off log-btn">登录</button>
             <div class="third-party">
                 <a href="#" class="log-qq icon-qq-round"></a>

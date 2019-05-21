@@ -202,8 +202,30 @@ public class CmUserService extends BaseService<CmUserPO>{
 		String[] columnProperty = {"id","account","username","password","avatar","tel","creatTime","state","departmentId","studentId","role"};
 		return this.findExpByQuery(q, columnProperty);
 	}
+
+	public void insertSelective(CmUser user) {
+		userDAO.insertSelective(user);
+	}
 	
 	
-	
+	/**
+	 * 更新个人信息
+	 * @param obj
+	 * @throws MysqlDBException
+	 */
+	public void updateUserInfo(CmUser obj) throws MysqlDBException{
+		if(ObjectUtil.isEmpty(obj)){
+			MysqlDBException e = new MysqlDBException("修改对象为空");
+			log.error("修改对象为空",e);
+			throw e;
+		}
+		userDAO.updateUserInfo(obj);
+	}
+
+	public Paged<UserInfoDTO> queryEmployee(Integer page,Integer limit,String departmentId) {
+		List<UserInfoDTO> list = userDAO.queryEmployee(departmentId);
+		Paged<UserInfoDTO> pages = new  Paged<UserInfoDTO>(list, list.size(), page, limit, true);
+		return pages;
+	}
 }
 

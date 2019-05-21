@@ -127,4 +127,8 @@
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getEmplayee" resultType="java.util.Map">
+    SELECT username name,id value FROM cm_user WHERE department_id = #{departmentId}
+  </select>
 </mapper>

@@ -1,20 +1,25 @@
 package mess.wkb.cm.code.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.bean.Query;
 import mess.wkb.cm.tool.web.MysqlDBException;
 import mess.wkb.cm.tool.util.ObjectUtil;
-
+import mess.wkb.cm.code.dao.CmAttendanceRecordDAO;
 import mess.wkb.cm.code.po.CmAttendanceRecordPO;
 
 
 @Service("cmAttendanceRecordService")
 public class CmAttendanceRecordService extends BaseService<CmAttendanceRecordPO>{
+	
+	@Autowired
+	CmAttendanceRecordDAO attendanceRecordDAO;
 	
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -29,7 +34,7 @@ public class CmAttendanceRecordService extends BaseService<CmAttendanceRecordPO>
 			log.error("新增对象为空",e);
 			throw e;
 		}
-		this.insert(obj);
+		attendanceRecordDAO.insertSelective(obj);
 	}
 	
 	/**
@@ -43,7 +48,7 @@ public class CmAttendanceRecordService extends BaseService<CmAttendanceRecordPO>
 			log.error("修改对象为空",e);
 			throw e;
 		}
-		this.update(obj);
+		attendanceRecordDAO.updateByPrimaryKeySelective(obj);
 	}
 	
 	/**
@@ -62,16 +67,11 @@ public class CmAttendanceRecordService extends BaseService<CmAttendanceRecordPO>
 	
 	/**
 	 * 通过主键 查询对象
-	 * @param id
+	 * @param long1
 	 * @throws MysqlDBException
 	 */
-	public CmAttendanceRecordPO getCmAttendanceRecordById(String id) throws MysqlDBException{
-		if(ObjectUtil.isEmpty(id)){
-			MysqlDBException e = new MysqlDBException("通过主键 查询对象，主键 id 不能为空");
-			log.error("通过主键 查询对象，主键 id 不能为空",e);
-			throw e;
-		}
-		return this.get(id);
+	public CmAttendanceRecordPO getCmAttendanceRecordById(Long long1) throws MysqlDBException{
+		return attendanceRecordDAO.selectByPrimaryKey(long1);
 	}
 	
 	/**
@@ -175,6 +175,14 @@ public class CmAttendanceRecordService extends BaseService<CmAttendanceRecordPO>
         if(!ObjectUtil.isEmpty(obj.getAttendanceId()))q.addEq("attendanceId", obj.getAttendanceId()); 
 		String[] columnProperty = {"id","signTime","departmentId","userName","state","attendanceId"};
 		return this.findExpByQuery(q, columnProperty);
+	}
+
+	public void seat(Map<String, String> map) {
+		attendanceRecordDAO.seat(map);
+	}
+
+	public CmAttendanceRecordPO getAttend(CmAttendanceRecordPO po) {
+		return attendanceRecordDAO.getAttend(po);
 	}
 	
 	

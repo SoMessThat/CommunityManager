@@ -1,3 +1,14 @@
+function checkState(state){
+	if (state == '未阅') {
+		return 'come';
+	}
+	if (state == '已阅') {
+		return 'open';
+	}
+	return 'close';
+}
+
+
 $(function(){
 
 	var intiContent = function () {	
@@ -42,13 +53,14 @@ $(function(){
 								$("#SummaryDemo").append('<div class="ResultCont" style="margin-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">'+
 										'<div class="title">'+
 										'<a href="" target="_blank"><em></em>'+data.data[i].name+'</a>'+
-										'<a href="javascript:void(0)">'+
-										'<i class="icon icon_Miner" id="icon1" title="'+data.data[i].state+
-										'" style="margin-left: 0px; background: url(../images/Ended.png) no-repeat center center; background-size: cover;"></i>'+
-										'</a>'+
+										'<b class="layui-btn mini '+checkState(data.data[i].state)+
+										'">'+data.data[i].state+'</b>'+
+										'</div>'+
+										'<div class="Volume">'+
+										'<div class="summary">'+
+										'<em>提交人：</em>：'+data.data[i].userName+''+
 										'</div>'+
 										'<div class="ResultMoreinfo">'+
-										'<div class="Volume">'+
 										'<a href="" target="_blank">创建时间：'+data.data[i].creatTime+'</a>'+
 										'</div>'+
 										'</div>'+
