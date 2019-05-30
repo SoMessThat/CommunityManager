@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mess.wkb.cm.code.po.CmPaymentPO;
-import mess.wkb.cm.code.service.CmDepartmentService;
 import mess.wkb.cm.code.service.CmPaymentService;
-import mess.wkb.cm.code.vo.CmDepartment;
 import mess.wkb.cm.tool.bean.Paged;
 import mess.wkb.cm.tool.util.ObjectUtil;
 import mess.wkb.cm.tool.util.ajax.Response;
@@ -29,9 +27,6 @@ public class CmPaymentCtrl {
 
 	@Autowired
 	private CmPaymentService cmPaymentService;
-	
-	@Autowired
-	private CmDepartmentService cmDepartmentService;
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
