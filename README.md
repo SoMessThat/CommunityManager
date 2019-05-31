@@ -12,6 +12,7 @@ http://www.jq22.com/yanshi16193
 关键词：社团活动，社团管理，SSM框架，ECharts
 
 
+
 Community Management system based on SSM
 Abstract
 With the development of the times, it has now entered the era of artificial intelligence. Today, a wide variety of app and web applications are convenient for our lives. And in this era of our university, the clubs activities are an essential part, and it has enriched our university life and let us exercise every aspect of our life.
