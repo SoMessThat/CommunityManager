@@ -42,7 +42,6 @@ public class BackCtrl{
 		ModelAndView mv = new ModelAndView();
 		String account = request.getParameter("userinp");
 		String password = request.getParameter("password");
-//		Long loginTime = Long.parseLong(request.getParameter("loginTime"));
 		if (ObjectUtil.isEmpty(account)) {
 			mv.addObject("erro", "账号不能为空");
 			mv.setViewName("redirect:html/login.html");
