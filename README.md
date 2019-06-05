@@ -12,15 +12,6 @@
 这个社团管理系统是基于SSM框架所开发的。 它结合了Spring、Spring MVC、和Mybatis的优势。轻量型，速度快，效率高，通过控制反转和面向切面的方法，让我们不再关注各个对象的依赖关系，从而方便解耦，简化了开发，不仅如此，它还解除了sql语句和代码的耦合，还可利用xml标签，支持动态的sql。并且，系统还使用了ECharts的表格，将零散的数据整理成了可视化的数据。增强了用户体验。
 关键词：社团活动，社团管理，SSM框架，ECharts
 
-
-
-Community Management system based on SSM
-Abstract
-With the development of the times, it has now entered the era of artificial intelligence. Today, a wide variety of app and web applications are convenient for our lives. And in this era of our university, the clubs activities are an essential part, and it has enriched our university life and let us exercise every aspect of our life.
-In the present stage, the activities of the students associations are carried out through paper-based reports, and some things are not transparent, but often we want to be able to publish the matter to the students, and the students can be informed of the affairs of the community in a timely and transparent manner. Such as various organizations under the student union, each having a variety of activities. They need a variety of forms, but if a system can be used to reduce the work of the paper document, the workload will be greatly reduced, and the evaluation process will be transparent, which will promote the development of the community and standardize the student’s community management system. 
-Therefore, the community management system is proposed to meet these needs, in which each person can do his or her job efficiently and efficiently. It also has a powerful report function, through a variety of column charts, fan charts; line charts intuitively show the situation of the campus, so as to perfectly show the convenience of the community management system. 
-This community management system is based on the SSM framework. It combines the advantages of Spring, Spring MVC, and Mybatis. Lightweight, high speed, high efficiency, through inversion of control and aspect-oriented approach, let us no longer focus on the dependence of each object, thus facilitating decoupling, simplifying development, and uncoupling sql statements and code, You can also take advantage of xml tags to support dynamic sql. Moreover, the system uses ECharts tables to organize scattered data into visual data. Enhanced user experience.
-Key words：Club events, Community Management, SSM, ECharts
 目录
 1 绪论	1
 1.1课题研究的背景	1
@@ -653,26 +644,3 @@ CPU  (英特尔)Intel(R) Core(TM) i7-4500U CPU @ 1.80GHz(2401 MHz)
 （2）这个系统在大学十分重要，经过前期的调查，这个系统在校园中有着不错的人气与期望值。由于其他社团管理系统的功能并不完全，而且只有一些简单的部门管理，例如人员管理。因此现有的其它社团管理系统并不能充分发挥它的便利之处，这也是这些系统一直未被投放使用的原因。这使得这个版本的系统的优势突显出来，可视化的数据分析，方便的查找到上课迟到或者晚归的信息等等。同比其它版本，这个的存在价值更高，值得投入使用。
 （3）由于时间仓促，本应功能庞大的功能被简化，留下了好用的功能；在设计中仍然考虑的不够周全，存在这一些逻辑存在漏洞的功能；还有未和辅导员楼管及学校领导紧密绑定一起，只是简单分析一些数据。希望在以后的版本中能够在社团中发现问题后能够及时通知相关人员以及显示，充分避免数据的实效性，及时分析，从而更加完善这个系统，让其在很长一段时间无法替代以及大范围的投入使用。
 总的来说，现如今的情形下，该系统还是能够被小范围使用，并且这个系统简单，代码结构易懂，能够进行二次开发，在一期的基础上，对一期的版本进行升级，从而更好的满足用户需求。
-
-8 致谢
-时光飞逝，转眼半年已经过去。似乎很快，却也似乎十分漫长，在这半年的时间里我学会了很多。当然这得多亏我的导师，老师，同学，朋友还有公司的同事。我想在这半年里，对于我是一次质的飞跃，华丽的蜕变。通过这一份平凡却也不简单的毕业设计，让我迅速成长。感谢你们！
-首先得感谢我的指导老师*教授，本文是在*导师的指导下完成的，是他在我捉摸不到头脑的时候，用他高远的眼光指导我，让我看到了不一样的解决方式，甚至更优。感谢您，我的导师，谢谢您从不厌烦地用您措置裕如的经验让我解决无数困难险阻；谢谢您在我快走偏的时候用您独特的见解指引我，带我走出迷雾。感谢您，我的导师，我的大学因为您而画上完美的句号。
-其次，我还要感谢那些所有教过我的老师，你们教会了我非常多的知识，更重要的是还教会了我如何学习，从而在今后不在学校的日子能够自己吸取养分，甚至让我明白，只有读书才能让自己充实，只有不断读书再能更理解这个世界。谢谢你们。
-最后还要感谢我的室友们，朋友们，以及同事们。从他们哪里我也学会很多技能、方法，在同他们交流中，我收获了很多不同的见解，不同的视角，一个自己的盲区从别人严中口中发现。感谢我的伙伴们，能够给我讲解什么原因引起的bug以及告诉我思路中的漏洞，让我能够考虑周全，也让我的思维更加广阔。他们让我知道无论是代码还是人生，总有无数种视角,不光光是一种解题方法。感谢你们，让我学会了很多的人生道理。
-最后，向参加毕业论文评审的老师表示真挚谢意，谢谢你们，你们辛苦了，还望你们多多指教。在未来的日子里，我定会不负众望，继续努力，让我的人生绽放更美丽的烟火。
-
-9 参考文献
-[1]刘欢,李功权.基于WebGIS的校园社团管理系统[J].地理空间信息,2018,16(3):68-70. DOI:10.3969/j.issn.1672-4623.2018.03.020.
-[2]王钢,李曦.高校艺术社团建设与校园文化管理[J].艺术品鉴,2018,000 (015):P.250-251.
-[4]许一帆.浅析校园学生社团管理[J].卷宗,2017,(7):91-91,92.
-[5]许永华.中等职业学校校园社团管理系统管理系统分析与设计[D].云南:云南大学,2014. 
-[6]骆龙飞.基于Oracle BIEE图表展示与ECharts结合的优化研究[J].信息技术与信息化,2017,(11):108-110. DOI:10.3969/j.issn.1672-9528.2017.11.031.
-[7]乔岚.基于MyBatis和Spring的JavaEE数据持久层的研究与应用[J].信息与电脑,2017,(8):73-76. DOI:10.3969/j.issn.1003-9767.2017.08.028.
-[8]杨晶洁.基于Spring+Struts2+Mybatis架构的设备状况管理系统的设计[J].电脑迷,2017,(6):112-113. DOI:10.3969/j.issn.1672-528X.2017.06.095.
-[9]罗迪,云龙,杨姣.基于Spring+MyBatis的高校人事管理系统的设计与实现[J].数字技术与应用,2017,(4):179. DOI:10.3969/j.issn.1007-9416.2017.04.112.
-[10]乔岚.基于MyBatis和Spring的JavaEE数据持久层的研究与应用[J].信息与电脑(理论版),2017,(008):73-76.
-[11]阳小兰,罗明.基于Spring+SpringMVC+MyBatis网上论坛的设计与实现[J].黑龙江科技信息,2016,(36):279-280. DOI:10.3969/j.issn.1673-1328.2016.36.249.
-[12]张惜杰,李平,张志强, 等.基于ECharts与ArcGIS JavaScript API的Web专题制图研究[J].测绘,2017,40(6):270-273. DOI:10.3969/j.issn.1674-5019.2017.06.009.
-[13]冯娟,张雅丽,梁栋栋.基于Echarts的居民出游时空可视化研究——以芜湖市为例[J].电脑知识与技术,2017,13(31):215-218.
-[14]冀潇,李杨.采用ECharts可视化技术实现的数据体系监控系统[J].计算机系统应用,2017,26(6):72-76. DOI:10.15888/j.cnki.csa.005782.
-[15]平安科技（深圳）有限公司.基于eCharts工具的图表制作方法、装置、设备及介质:中国,CN201711291906.3[P].2018-06-29
