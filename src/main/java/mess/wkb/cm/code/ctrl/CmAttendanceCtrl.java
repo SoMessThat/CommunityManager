@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +41,7 @@ public class CmAttendanceCtrl {
 	 */
 	@RequestMapping(value ="/queryPageCmAttendance")
 	@ResponseBody
-	public Response<List<CmAttendancePO>> queryPageCmAttendance(Integer page,Integer limit,HttpServletRequest request) throws ParseException{
+	public Response<List<CmAttendancePO>> queryPageCmAttendance(@RequestParam Integer page,@RequestParam Integer limit,HttpServletRequest request) throws ParseException{
 		Response<List<CmAttendancePO>> response = ResponseFactory.getDefaultSuccessResponse();
 		Paged<CmAttendancePO> cmAttendances = null;
 
@@ -58,7 +59,7 @@ public class CmAttendanceCtrl {
 		}
 		
 		condition.setDepartmentId(departmentId);
-		String id = request.getParameter("cmAttendance_id");
+		String id = request.getParameter("page");
 		if(!ObjectUtil.isEmpty(id)) condition.setId(Long.valueOf(id));
 		String name = request.getParameter("cmAttendance_name");
 		if(!ObjectUtil.isEmpty(name)) condition.setName(String.valueOf(name));
@@ -77,7 +78,7 @@ public class CmAttendanceCtrl {
 		
 
 		try {
-			cmAttendances = cmAttendanceService.queryPageCmAttendance(page,limit,condition);
+			cmAttendances = cmAttendanceService.queryPageCmAttendance(Integer.parseInt(request.getParameter("page")),Integer.parseInt(request.getParameter("limit")),condition);
 		} catch (MysqlDBException e) {
 			e.printStackTrace();
 			response.setError("网络连接失败，请检查网络");
