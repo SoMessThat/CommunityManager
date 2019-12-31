@@ -1,6 +1,6 @@
 # CommunityManager
 ## 学生社团管理系统
-&nbsp;&nbsp;☛☛☛[事例请点击这里](http://www.bemess.xyz:8765/CommunityManager/html/login.html)<br>
+&nbsp;&nbsp;☛☛☛[事例请点击这里](http://www.somessthat.xyz:8765/CommunityManager/html/login.html)<br>
 账号：1<br>
 密码：1<br><br>
 ### 学生干事功能分析<br>
