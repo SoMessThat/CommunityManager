@@ -11,7 +11,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>5.2.2.RELEASE</spring.version>
+		<spring.version>5.2.4.RELEASE</spring.version>
 		<com.alibaba.dubbo>2.5.3</com.alibaba.dubbo>
 		<org.apache.zookeeper>3.3.3</org.apache.zookeeper>
 		<com.github.sgroschupf.zkclient>0.1</com.github.sgroschupf.zkclient>
